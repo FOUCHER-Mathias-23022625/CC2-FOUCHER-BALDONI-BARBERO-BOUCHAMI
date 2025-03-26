@@ -3,6 +3,7 @@ namespace control;
 class Presenter
 {
     protected $annoncesCheck;
+    protected $product;
 
     public function __construct($annoncesCheck)
     {
@@ -65,5 +66,27 @@ class Presenter
             $content .= '</ul>';
         }
         return $content;
+    }
+
+    public function getAllProduct()
+    {
+        $content = null;
+        if ($this->product->getProductTxt() != null) {
+            $content = '<h1>Liste de tout les produits</h1>';
+            $content = '<div class="products-container">';
+            foreach ($this->product->getProductTxt() as $product) {
+                $content .= '<div class="product-card">';
+            $content .='<div class="product-name">'. $product['name'] .'</div>';
+            $content .='<div class="product-price">'. $product['price'] .'</div>';
+            $content .='<div class="quantity-control">
+                <button onclick="updateQuantity(this, -1)">-</button>
+                <input type="number" value="1" min="1" max="10">
+                <button onclick="updateQuantity(this, 1)">+</button>
+            </div>
+            
+            <button class="add-to-cart">Ajouter au panier</button>
+        </div>';
+            }
+        }
     }
 }
