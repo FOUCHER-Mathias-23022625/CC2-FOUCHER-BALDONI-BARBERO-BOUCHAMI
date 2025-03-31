@@ -1,0 +1,462 @@
+/* Styles pour la page d'accueil */
+.home-container {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Hero Banner */
+.hero-banner {
+    background-image: url('/images/hero-farm.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    color: white;
+}
+
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.hero-content p {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.cta-button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.cta-button.primary {
+    background-color: #2e8b57;
+    color: white;
+    border: 2px solid #2e8b57;
+}
+
+.cta-button.primary:hover {
+    background-color: #3cb371;
+    border-color: #3cb371;
+    transform: translateY(-3px);
+}
+
+.cta-button.secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.cta-button.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+/* Sections générales */
+section {
+    padding: 5rem 2rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    color: #2e8b57;
+    margin-bottom: 0.5rem;
+}
+
+.separator {
+    width: 80px;
+    height: 4px;
+    background-color: #2e8b57;
+    margin: 0 auto;
+}
+
+/* Section À propos */
+.about-section {
+    background-color: #f9f9f9;
+}
+
+.about-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-text p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* Section Comment ça marche */
+.how-it-works {
+    background-color: white;
+}
+
+.steps-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.step-card {
+    flex: 1;
+    min-width: 220px;
+    max-width: 260px;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+}
+
+.step-icon {
+    margin-bottom: 1.5rem;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-icon img {
+    width: 60px;
+    height: auto;
+}
+
+.step-card h3 {
+    color: #2e8b57;
+    margin-bottom: 1rem;
+}
+
+.step-card p {
+    color: #666;
+}
+
+/* Section produits de saison */
+.products-preview {
+    background-color: #f9f9f9;
+}
+
+.products-slider {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-slide {
+    flex: 1;
+    min-width: 250px;
+    max-width: 280px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.product-slide:hover {
+    transform: translateY(-10px);
+}
+
+.product-slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-slide h3 {
+    color: #2e8b57;
+    padding: 1rem 1rem 0.5rem;
+    margin: 0;
+}
+
+.product-slide p {
+    color: #666;
+    padding: 0 1rem 1.5rem;
+    margin: 0;
+}
+
+/* Section témoignages */
+.testimonials {
+    background-color: white;
+}
+
+.testimonial-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 380px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    position: relative;
+}
+
+.quote {
+    font-size: 5rem;
+    color: #2e8b57;
+    position: absolute;
+    top: -15px;
+    left: 10px;
+    opacity: 0.2;
+    font-family: Georgia, serif;
+}
+
+.testimonial-card p {
+    position: relative;
+    z-index: 1;
+    color: #555;
+}
+
+.testimonial-author {
+    margin-top: 1.5rem;
+    text-align: right;
+}
+
+.testimonial-author p {
+    margin: 0;
+}
+
+/* Section formulaire de connexion */
+.login-section {
+    background-color: #f9f9f9;
+}
+
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.login-form {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #444;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2e8b57;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.submit-button {
+    background-color: #2e8b57;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #3cb371;
+}
+
+.create-account {
+    color: #2e8b57;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.create-account:hover {
+    text-decoration: underline;
+}
+
+/* Section contact */
+.contact-section {
+    background-color: white;
+}
+
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.contact-item i {
+    margin-right: 1rem;
+    color: #2e8b57;
+    font-size: 1.5rem;
+}
+
+.map-container {
+    flex: 1;
+    min-width: 300px;
+}
+
+.map-container img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Media queries pour la responsivité */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.3rem;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+    
+    .about-content, .contact-container {
+        flex-direction: column;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    section {
+        padding: 3rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-buttons {
+        flex-direction: column;
+    }
+    
+    .cta-button {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Icônes pour la section contact */
+.icon-location::before {
+    content: "📍";
+}
+.icon-phone::before {
+    content: "📞";
+}
+.icon-email::before {
+    content: "✉️";
+}
+.icon-hours::before {
+    content: "🕒";
+}

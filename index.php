@@ -23,6 +23,7 @@ include_once 'gui/ViewPanier.php';   // À créer
 include_once 'gui/ViewProduits.php'; // À créer
 include_once 'gui/ViewCommande.php'; // À créer
 include_once 'gui/ViewPanier.php';   // À créer
+include_once 'gui/ViewAccueil.php';  // À créer
 
 use gui\{
     ViewLogin,
@@ -33,6 +34,7 @@ use gui\{
     ViewPanier, 
     ViewProduits,
     ViewCommande,
+    ViewAccueil,
     Layout
 };
 use control\{Controllers, Presenter};
@@ -119,6 +121,15 @@ elseif ('/index.php/produits' == $uri) {
     $layout = new Layout("gui/layoutLogged.html");
     $vueProduits = new ViewProduits($layout, $_SESSION['login'], $presenter);
     $vueProduits->display();
+}
+elseif ('/index.php/accueil' == $uri) {
+    // Affichage de tous les produits
+    // À implémenter : récupération des produits
+    // $controller->produitsAction($dataProduits, $produitsCheck);
+
+    $layout = new Layout("gui/layoutLogged.html");
+    $vueAcceuil = new ViewAccueil($layout, $_SESSION['login'], $presenter);
+    $vueAcceuil->display();
 }
 elseif ('/index.php/commande' == $uri) {
     // Validation d'une commande
