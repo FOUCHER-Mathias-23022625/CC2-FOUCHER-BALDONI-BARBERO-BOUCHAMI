@@ -68,3 +68,39 @@ a:hover {
     color: #3cb371;
     text-decoration: underline;
 }
+
+/* Ajouter au fichier login.css */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem;
+}
+
+.login-form {
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-form h2 {
+    color: #2e8b57;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.create-account-link {
+    margin-top: 1.5rem;
+    text-align: center;
+    color: #555;
+}
+
+.create-account-link a {
+    color: #2e8b57;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.create-account-link a:hover {
+    text-decoration: underline;
+}

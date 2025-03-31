@@ -1,4 +1,6 @@
 <?php
+// filepath: c:\Users\malio\Desktop\dossier important\coursIUTaix\archi logi\CC2\CC2-FOUCHER-BALDONI-BARBERO-BOUCHAMI\gui\ViewCreate.php
+
 namespace gui;
 
 include_once "View.php";
@@ -9,25 +11,36 @@ class ViewCreate extends View
     {
         parent::__construct($layout);
 
-        $this->title = 'Exemple Annonces Basic PHP: Création du compte';
+        $this->title = 'Coopérative Agricole - Création de compte';
 
         $this->content = '
-            <form method="post" action="/index.php/annonces">
-                <label for="login"> Votre identifiant </label> :
-                <input type="text" name="login" id="login" placeholder="defaut" maxlength="12" required />
-                <br />
-                <label for="password"> Votre mot de passe </label> :
-                <input type="password" name="password" id="password" minlength="12" required />
-                <br />
-                <label for="name"> Votre Nom </label> :
-                <input type="text" name="name" id="name" placeholder="defaut" maxlength="20" required />
-                <br />
-                <label for="firstName"> Votre Prénom </label> :
-                <input type="text" name="firstName" id="firstName" placeholder="defaut" maxlength="20" required />
-                <br />
-                <input type="submit" value="Envoyer">
-                <input type="reset"> 
-            </form>
-            <a href="/index.php">retour</a>';
+            <div class="login-container">
+                <form method="post" action="/index.php/create" class="login-form">
+                    <h2>Créer un compte</h2>
+                    <div class="form-group">
+                        <label for="login">Identifiant :</label>
+                        <input type="text" name="login" id="login" placeholder="Choisissez un identifiant" maxlength="20" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe :</label>
+                        <input type="password" name="password" id="password" placeholder="Choisissez un mot de passe" minlength="8" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Nom :</label>
+                        <input type="text" name="name" id="name" placeholder="Votre nom" maxlength="20" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="firstName">Prénom :</label>
+                        <input type="text" name="firstName" id="firstName" placeholder="Votre prénom" maxlength="20" required />
+                    </div>
+                    <div class="form-actions">
+                        <input type="submit" value="Créer mon compte" class="submit-button">
+                    </div>
+                    <p class="create-account-link">
+                        Déjà inscrit ? <a href="/index.php">Se connecter</a>
+                    </p>
+                </form>
+            </div>
+        ';
     }
 }

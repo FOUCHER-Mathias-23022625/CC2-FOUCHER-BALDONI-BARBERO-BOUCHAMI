@@ -1,0 +1,44 @@
+    [
+        {
+        "login": "admin",
+        "password": "administrator123",
+        "name": "Admin",
+        "firstName": "System",
+        "date": "2025-01-10 08:30:00"
+        },
+        {
+        "login": "marie.dupont",
+        "password": "MarieAimeLegumes2024",
+        "name": "Dupont",
+        "firstName": "Marie",
+        "date": "2025-02-15 14:22:15"
+        },
+        {
+        "login": "thomas.laurent",
+        "password": "TomaTesBiologiques22",
+        "name": "Laurent",
+        "firstName": "Thomas",
+        "date": "2025-02-20 09:45:30"
+        },
+        {
+        "login": "sophie.martin",
+        "password": "FruitsFrais2025Sophie",
+        "name": "Martin",
+        "firstName": "Sophie",
+        "date": "2025-03-01 16:10:45"
+        },
+        {
+        "login": "paul.bernard",
+        "password": "PaulAimeFromages2025",
+        "name": "Bernard",
+        "firstName": "Paul",
+        "date": "2025-03-10 11:05:22"
+        },
+        {
+        "login": "celine.petit",
+        "password": "CelinePaniersBio2025",
+        "name": "Petit",
+        "firstName": "Céline",
+        "date": "2025-03-15 17:30:10"
+        }
+    ]

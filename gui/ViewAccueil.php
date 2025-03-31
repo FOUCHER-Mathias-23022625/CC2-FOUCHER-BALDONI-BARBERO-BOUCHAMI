@@ -20,7 +20,6 @@ class ViewAccueil extends View
                     <p>Des produits frais, locaux et de saison directement des producteurs à votre table</p>
                     <div class="cta-buttons">
                         <a href="#about" class="cta-button secondary">Découvrir</a>
-                        <a href="#login-form" class="cta-button primary">Se connecter</a>
                     </div>
                 </div>
             </div>
@@ -139,30 +138,6 @@ class ViewAccueil extends View
                             <p><strong>Sophie M.</strong> - Cliente depuis 2021</p>
                         </div>
                     </div>
-                </div>
-            </section>
-            
-            <!-- Formulaire de connexion -->
-            <section id="login-form" class="login-section">
-                <div class="section-header">
-                    <h2>Connectez-vous</h2>
-                    <div class="separator"></div>
-                </div>
-                <div class="form-container">
-                    <form method="post" action="/index.php/produits" class="login-form">
-                        <div class="form-group">
-                            <label for="login">Votre identifiant :</label>
-                            <input type="text" name="login" id="login" placeholder="Entrez votre identifiant" maxlength="12" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Votre mot de passe :</label>
-                            <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe" minlength="12" required />
-                        </div>
-                        <div class="form-actions">
-                            <input type="submit" value="Se connecter" class="submit-button">
-                            <a href="/index.php/create" class="create-account">Créer un compte</a>
-                        </div>
-                    </form>
                 </div>
             </section>
             

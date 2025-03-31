@@ -1,4 +1,6 @@
 <?php
+// filepath: c:\Users\malio\Desktop\dossier important\coursIUTaix\archi logi\CC2\CC2-FOUCHER-BALDONI-BARBERO-BOUCHAMI\gui\ViewLogin.php
+
 namespace gui;
 
 include_once "View.php";
@@ -9,20 +11,28 @@ class ViewLogin extends View
     {
         parent::__construct($layout);
 
-        $this->title = 'Exemple produits Basic PHP: Connexion';
+        $this->title = 'Coopérative Agricole - Connexion';
 
         $this->content = '
-            <form method="post" action="/index.php">
-                <label for="name"> Votre nom : </label>
-                <input type="text" name="name" id="name" placeholder="defaut" maxlength="12" required />
-                <br />
-                <label for="pwd"> Votre mot de passe : </label> 
-                <input type="password" name="pwd" id="pwd" minlength="12" required />
-        
-                <input type="submit" value="Envoyer">
-            </form>
-            
-            <a href="/index.php/create">Création d\'un nouveau compte</a>
-            ';
+            <div class="login-container">
+                <form method="post" action="/index.php/login" class="login-form">
+                    <h2>Connexion</h2>
+                    <div class="form-group">
+                        <label for="login">Identifiant :</label>
+                        <input type="text" name="login" id="login" placeholder="Votre identifiant" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe :</label>
+                        <input type="password" name="password" id="password" placeholder="Votre mot de passe" required />
+                    </div>
+                    <div class="form-actions">
+                        <input type="submit" value="Se connecter" class="submit-button">
+                    </div>
+                    <p class="create-account-link">
+                        Pas encore de compte ? <a href="/index.php/create">Créer un compte</a>
+                    </p>
+                </form>
+            </div>
+        ';
     }
 }

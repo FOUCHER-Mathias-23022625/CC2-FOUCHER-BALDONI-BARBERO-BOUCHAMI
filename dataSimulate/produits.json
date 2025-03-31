@@ -1,0 +1,152 @@
+    [
+        {
+        "id": 1,
+        "nom": "Tomates",
+        "description": "Tomates fraîches de saison cultivées en pleine terre sans pesticides.",
+        "prix": 3.50,
+        "unite": "kg",
+        "stock": 100,
+        "image": "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80",
+        "categorie": "Légumes"
+        },
+        {
+        "id": 2,
+        "nom": "Carottes",
+        "description": "Carottes bio croquantes et sucrées, cultivées sans engrais chimiques.",
+        "prix": 2.80,
+        "unite": "kg",
+        "stock": 150,
+        "image": "https://images.unsplash.com/photo-1447175008436-054170c2e979?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1999&q=80",
+        "categorie": "Légumes"
+        },
+        {
+        "id": 3,
+        "nom": "Pommes de terre",
+        "description": "Pommes de terre de variété Charlotte, idéales pour les salades ou à la vapeur.",
+        "prix": 2.20,
+        "unite": "kg",
+        "stock": 180,
+        "image": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        "categorie": "Légumes"
+        },
+        {
+        "id": 4,
+        "nom": "Courgettes",
+        "description": "Courgettes vertes fraîches et tendres, cultivées en plein champ.",
+        "prix": 2.90,
+        "unite": "kg",
+        "stock": 90,
+        "image": "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80",
+        "categorie": "Légumes"
+        },
+        {
+        "id": 5,
+        "nom": "Salade",
+        "description": "Salade batavia croquante et savoureuse, cultivée sans pesticides.",
+        "prix": 1.50,
+        "unite": "pièce",
+        "stock": 50,
+        "image": "https://images.unsplash.com/photo-1621667729191-3f017db0af46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80",
+        "categorie": "Légumes"
+        },
+        {
+        "id": 6,
+        "nom": "Pommes",
+        "description": "Pommes Gala juteuses et croquantes, cultivées sans traitement après récolte.",
+        "prix": 3.20,
+        "unite": "kg",
+        "stock": 120,
+        "image": "https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1970&q=80",
+        "categorie": "Fruits"
+        },
+        {
+        "id": 7,
+        "nom": "Poires",
+        "description": "Poires Williams à la chair fondante et parfumée, cultivées en agriculture raisonnée.",
+        "prix": 3.80,
+        "unite": "kg",
+        "stock": 80,
+        "image": "https://images.unsplash.com/photo-1615484477778-ca3b77940c25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80",
+        "categorie": "Fruits"
+        },
+        {
+        "id": 8,
+        "nom": "Fraises",
+        "description": "Fraises Gariguette parfumées et sucrées, cultivées sans pesticides.",
+        "prix": 4.50,
+        "unite": "barquette 250g",
+        "stock": 60,
+        "image": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        "categorie": "Fruits"
+        },
+        {
+        "id": 9,
+        "nom": "Œufs fermiers",
+        "description": "Œufs frais de poules élevées en plein air, nourries aux céréales et herbes.",
+        "prix": 4.20,
+        "unite": "douzaine",
+        "stock": 40,
+        "image": "https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+        "categorie": "Produits animaux"
+        },
+        {
+        "id": 10,
+        "nom": "Fromage de chèvre",
+        "description": "Fromage de chèvre artisanal affiné 2 semaines, au lait cru de notre élevage.",
+        "prix": 5.80,
+        "unite": "pièce",
+        "stock": 30,
+        "image": "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80",
+        "categorie": "Produits laitiers"
+        },
+        {
+        "id": 11,
+        "nom": "Yaourt nature",
+        "description": "Yaourts nature onctueux au lait entier de vache, fabriqués à la ferme.",
+        "prix": 3.90,
+        "unite": "pack de 4",
+        "stock": 45,
+        "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+        "categorie": "Produits laitiers"
+        },
+        {
+        "id": 12,
+        "nom": "Miel de lavande",
+        "description": "Miel de lavande récolté dans nos champs de Provence, non pasteurisé.",
+        "prix": 8.50,
+        "unite": "pot 250g",
+        "stock": 25,
+        "image": "https://images.unsplash.com/photo-1471943311424-646960669fbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        "categorie": "Produits de la ruche"
+        },
+        {
+        "id": 13,
+        "nom": "Pain complet",
+        "description": "Pain complet au levain naturel, farine bio T80 moulue à la pierre.",
+        "prix": 3.20,
+        "unite": "pièce 500g",
+        "stock": 20,
+        "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1972&q=80",
+        "categorie": "Boulangerie"
+        },
+        {
+        "id": 14,
+        "nom": "Huile d'olive",
+        "description": "Huile d'olive vierge extra pressée à froid, issue de nos oliviers en Provence.",
+        "prix": 12.50,
+        "unite": "bouteille 50cl",
+        "stock": 35,
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        "categorie": "Épicerie"
+        },
+        {
+        "id": 15,
+        "nom": "Confitures assorties",
+        "description": "Assortiment de confitures artisanales (fraise, abricot, cerise), préparées à la ferme.",
+        "prix": 15.90,
+        "unite": "coffret 3 pots",
+        "stock": 15,
+        "image": "https://images.unsplash.com/photo-1563807801278-7e5576b9da03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+        "categorie": "Épicerie"
+        }
+    ]
