@@ -13,7 +13,7 @@ class ViewAccueil extends View
 
         $this->content = '
         <div class="home-container">
-            <!-- Section bannière -->
+            <!-- Section bannière - L\'image est définie en CSS -->
             <div class="hero-banner">
                 <div class="hero-content">
                     <h1>Bienvenue à la Coopérative Agricole</h1>
@@ -33,7 +33,7 @@ class ViewAccueil extends View
                 </div>
                 <div class="about-content">
                     <div class="about-image">
-                        <img src="/images/farm-workers.jpg" alt="Travailleurs agricoles" />
+                        <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Travailleurs agricoles" />
                     </div>
                     <div class="about-text">
                         <p>Fondée en 2015 par un groupe de producteurs locaux passionnés, notre coopérative agricole s\'engage à offrir des produits frais et de qualité tout en respectant l\'environnement et les pratiques agricoles durables.</p>
@@ -52,28 +52,28 @@ class ViewAccueil extends View
                 <div class="steps-container">
                     <div class="step-card">
                         <div class="step-icon">
-                            <img src="/images/icon-register.svg" alt="Création de compte" />
+                            <img src="https://cdn-icons-png.flaticon.com/512/2271/2271113.png" alt="Création de compte" />
                         </div>
                         <h3>1. Créez un compte</h3>
                         <p>Inscrivez-vous pour accéder à notre sélection de produits frais et locaux.</p>
                     </div>
                     <div class="step-card">
                         <div class="step-icon">
-                            <img src="/images/icon-basket.svg" alt="Choix du panier" />
+                            <img src="https://cdn-icons-png.flaticon.com/512/4903/4903884.png" alt="Choix du panier" />
                         </div>
                         <h3>2. Choisissez votre panier</h3>
                         <p>Sélectionnez un panier précomposé ou des produits individuels.</p>
                     </div>
                     <div class="step-card">
                         <div class="step-icon">
-                            <img src="/images/icon-calendar.svg" alt="Date de retrait" />
+                            <img src="https://cdn-icons-png.flaticon.com/512/2693/2693507.png" alt="Date de retrait" />
                         </div>
                         <h3>3. Choisissez la date de retrait</h3>
                         <p>Sélectionnez un point relais et une date de retrait qui vous conviennent.</p>
                     </div>
                     <div class="step-card">
                         <div class="step-icon">
-                            <img src="/images/icon-pickup.svg" alt="Retrait du panier" />
+                            <img src="https://cdn-icons-png.flaticon.com/512/3028/3028418.png" alt="Retrait du panier" />
                         </div>
                         <h3>4. Récupérez vos produits</h3>
                         <p>Venez chercher vos produits frais au point de retrait et payez sur place.</p>
@@ -89,22 +89,22 @@ class ViewAccueil extends View
                 </div>
                 <div class="products-slider">
                     <div class="product-slide">
-                        <img src="/images/vegetables.jpg" alt="Légumes frais" />
+                        <img src="https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80" alt="Légumes frais" />
                         <h3>Légumes frais</h3>
                         <p>Des légumes de saison cueillis à maturité pour une saveur optimale.</p>
                     </div>
                     <div class="product-slide">
-                        <img src="/images/fruits.jpg" alt="Fruits de saison" />
+                        <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Fruits de saison" />
                         <h3>Fruits locaux</h3>
                         <p>Des fruits cultivés avec soin par nos producteurs locaux.</p>
                     </div>
                     <div class="product-slide">
-                        <img src="/images/dairy.jpg" alt="Produits laitiers" />
+                        <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80" alt="Produits laitiers" />
                         <h3>Produits laitiers</h3>
                         <p>Fromages, yaourts et autres délices produits artisanalement.</p>
                     </div>
                     <div class="product-slide">
-                        <img src="/images/eggs.jpg" alt="Œufs frais" />
+                        <img src="https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Œufs frais" />
                         <h3>Œufs frais</h3>
                         <p>Des œufs de poules élevées en plein air et nourries naturellement.</p>
                     </div>
@@ -192,7 +192,7 @@ class ViewAccueil extends View
                         </div>
                     </div>
                     <div class="map-container">
-                        <img src="/images/map.jpg" alt="Carte de localisation" />
+                        <img src="https://assets.mapquest.com/m/7ad3e2bf522dcae1/WebImage-static-map-Aix-en-Provence.png" alt="Carte de localisation" />
                     </div>
                 </div>
             </section>
