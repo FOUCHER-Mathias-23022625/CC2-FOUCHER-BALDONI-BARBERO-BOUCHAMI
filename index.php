@@ -79,6 +79,34 @@ if ('/' != $uri and '/index.php' != $uri and '/index.php/logout' != $uri and '/i
         if($error == 'creation impossible')
             $redirect = '/index.php/create';
     }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $name = $_POST['name'] ?? '';
+        $pwd = $_POST['pwd'] ?? '';
+
+        $data = json_encode([
+            'name' => $name,
+            'pwd' => $pwd
+        ]);
+
+        $ch = curl_init('http://localhost:8080/UserProduit-1.0-SNAPSHOT/api/user/authenticate');
+        curl_setopt_array($ch, [
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $data,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data)
+            ]
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+    }
+    $layout = new Layout("gui/layoutLogged.html");
+    $vueAcceuil = new ViewAccueil($layout, $_SESSION['login'], $presenter);
+    $vueAcceuil->display();
 }
 
 // Routage des requêtes

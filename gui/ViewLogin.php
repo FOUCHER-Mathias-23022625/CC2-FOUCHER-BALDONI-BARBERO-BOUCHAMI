@@ -12,12 +12,12 @@ class ViewLogin extends View
         $this->title = 'Exemple produits Basic PHP: Connexion';
 
         $this->content = '
-            <form method="post" action="/index.php/accueil">
-                <label for="login"> Votre identifiant : </label>
-                <input type="text" name="login" id="login" placeholder="defaut" maxlength="12" required />
+            <form method="post" action="/index.php">
+                <label for="name"> Votre nom : </label>
+                <input type="text" name="name" id="name" placeholder="defaut" maxlength="12" required />
                 <br />
-                <label for="password"> Votre mot de passe : </label> 
-                <input type="password" name="password" id="password" minlength="12" required />
+                <label for="pwd"> Votre mot de passe : </label> 
+                <input type="password" name="pwd" id="pwd" minlength="12" required />
         
                 <input type="submit" value="Envoyer">
             </form>
