@@ -1,204 +1,153 @@
 <?php
 
-include_once 'data/AnnonceSqlAccess.php';
+// Import des données et services existants à conserver
 include_once 'data/UserSqlAccess.php';
-include_once 'data/ApiAlternance.php';
-include_once 'data/ApiEmploi.php';
 
+// Import des nouveaux composants pour le e-commerce
 include_once 'control/Controllers.php';
 include_once 'control/Presenter.php';
 
-include_once 'service/AnnoncesChecking.php';
 include_once 'service/UserChecking.php';
 include_once 'service/UserCreation.php';
-include_once 'service/AnnonceCreation.php';
 
+// Import des vues à conserver
 include_once 'gui/Layout.php';
 include_once 'gui/ViewLogin.php';
-include_once 'gui/ViewAnnonces.php';
-include_once 'gui/ViewPost.php';
 include_once 'gui/ViewError.php';
 include_once 'gui/ViewLogged.php';
-include_once 'gui/ViewAnnoncesEmploi.php';
-include_once 'gui/ViewOffreEmploi.php';
 include_once 'gui/ViewCreate.php';
-include_once 'gui/ViewAnnoncesAlternance.php';
-include_once 'gui/ViewCompanyAlternance.php';
-include_once 'gui/ViewCreateAnnonce.php';
 
+// Import des nouvelles vues e-commerce
+include_once 'gui/ViewPaniers.php';  // À créer
+include_once 'gui/ViewPanier.php';   // À créer
+include_once 'gui/ViewProduits.php'; // À créer
+include_once 'gui/ViewCommande.php'; // À créer
+include_once 'gui/ViewPanier.php';   // À créer
+include_once 'gui/ViewAccueil.php';  // À créer
 
-
-use gui\{ViewAnnoncesAlternance,
-    ViewAnnoncesEmploi,
-    ViewCompanyAlternance,
-    ViewCreateAnnonce,
+use gui\{
     ViewLogin,
-    ViewAnnonces,
-    ViewOffreEmploi,
-    ViewPost,
     ViewError,
     ViewCreate,
     ViewLogged,
-    Layout};
+    ViewPaniers,
+    ViewPanier, 
+    ViewProduits,
+    ViewCommande,
+    ViewAccueil,
+    Layout
+};
 use control\{Controllers, Presenter};
-use data\{AnnonceSqlAccess, ApiAlternance, ApiEmploi, UserSqlAccess};
-use service\{AnnonceCreation, AnnoncesChecking, UserChecking, UserCreation};
-
+use data\{UserSqlAccess};
+use service\{UserChecking, UserCreation};
 
 $data = null;
 try {
-    $bd = new PDO('mysql:host=mysql-archilogitd1.alwaysdata.net;dbname=archilogitd1_annonces_db', '395426_annonce', 'Matlou29');
-    // construction du modèle
-    $dataAnnonces = new AnnonceSqlAccess($bd);
+    // Garder la connexion à la base de données existante pour l'authentification
+    $bd = new PDO('mysql:host=mysql-archilogicc2.alwaysdata.net;dbname=archilogicc2_db', '406081', 'ArchiLogicielCC2@');
     $dataUsers = new UserSqlAccess($bd);
-
 } catch (PDOException $e) {
     print "Erreur de connexion !: " . $e->getMessage() . "<br/>";
     die();
 }
-$apiEmploi = new ApiEmploi();
-$token = $apiEmploi->getToken() ;
-// initialisation du controller
+
+// Initialisation des services
 $controller = new Controllers();
+$userCheck = new UserChecking();
+$userCreation = new UserCreation();
 
-// intialisation du cas d'utilisation service\AnnoncesChecking
-$annoncesCheck = new AnnoncesChecking() ;
+// Initialisation du presenter (à adapter pour les produits/paniers)
+$presenter = new Presenter(null); // À modifier pour gérer les produits et paniers
 
-// intialisation du cas d'utilisation service\UserChecking
-$userCheck = new UserChecking() ;
-
-// intialisation du cas d'utilisation service\UserCreation
-$userCreation = new UserCreation() ;
-
-// intialisation du presenter avec accès aux données de AnnoncesCheking
-$presenter = new Presenter($annoncesCheck);
-
-$annonceCreation = new AnnonceCreation() ;
-
-// chemin de l'URL demandée au navigateur
-// (p.ex. /index.php)
+// Récupération de l'URL
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$apiAlternance = new ApiAlternance();
-// définition d'une session d'une heure
+// Configuration de la session
 ini_set('session.gc_maxlifetime', 3600);
 session_set_cookie_params(3600);
 session_start();
 
 // Authentification et création du compte (sauf pour le formulaire de connexion et de création de compte)
-if ( '/' != $uri and '/index.php' != $uri and '/index.php/logout' != $uri  and '/index.php/create' != $uri){
-
+if ('/' != $uri and '/index.php' != $uri and '/index.php/logout' != $uri and '/index.php/create' != $uri){
     $error = $controller->authenticateAction($userCreation, $userCheck, $dataUsers);
 
-    if( $error != null )
-    {
-        $uri='/index.php/error' ;
-        if( $error == 'bad login or pwd' or $error == 'not connected')
+    if($error != null){
+        $uri='/index.php/error';
+        if($error == 'bad login or pwd' or $error == 'not connected')
             $redirect = '/index.php';
 
-        if( $error == 'creation impossible')
+        if($error == 'creation impossible')
             $redirect = '/index.php/create';
     }
 }
 
-// route la requête en interne
-// i.e. lance le bon contrôleur en fonction de la requête effectuée
-if ( '/' == $uri || '/index.php' == $uri || '/index.php/logout' == $uri) {
-    // affichage de la page de connexion
-
+// Routage des requêtes
+if ('/' == $uri || '/index.php' == $uri || '/index.php/logout' == $uri) {
+    // Page de connexion
     session_destroy();
-    $layout = new Layout("gui/layout.html" );
-    $vueLogin = new ViewLogin( $layout );
-
+    $layout = new Layout("gui/layout.html");
+    $vueLogin = new ViewLogin($layout);
     $vueLogin->display();
 }
-elseif ( '/index.php/create' == $uri ) {
-    // Affichage du fromulaire de création de compte
-
-    $layout = new Layout("gui/layout.html" );
-    $vueCreate = new ViewCreate( $layout );
-
+elseif ('/index.php/create' == $uri) {
+    // Formulaire de création de compte
+    $layout = new Layout("gui/layout.html");
+    $vueCreate = new ViewCreate($layout);
     $vueCreate->display();
 }
-elseif ( '/index.php/annonces' == $uri ){
-    // affichage de toutes les annonces
+elseif ('/index.php/paniers' == $uri) {
+    // Affichage de tous les paniers disponibles
+    // À implémenter : récupération des paniers
+    // $controller->paniersAction($dataPaniers, $paniersCheck);
 
-    if(isset($_POST['contractType'])){
-        $controller->annonceCreationAction($_SESSION['login'], $_POST,$dataAnnonces,$annonceCreation);
-    }
-    $controller->annoncesAction($dataAnnonces, $annoncesCheck);
-
-    $layout = new Layout("gui/layoutLogged.html" );
-    $vueAnnonces= new ViewAnnonces( $layout,  $_SESSION['login'], $presenter);
-
-    $vueAnnonces->display();
+    $layout = new Layout("gui/layoutLogged.html");
+    $vuePaniers = new ViewPaniers($layout, $_SESSION['login'], $presenter);
+    $vuePaniers->display();
 }
-elseif ( '/index.php/post' == $uri
-    && isset($_GET['id'])) {
-    // Affichage d'une annonce
+elseif ('/index.php/panier' == $uri && isset($_GET['id'])) {
+    // Affichage du détail d'un panier
+    // À implémenter : récupération du panier spécifique
+    // $controller->panierAction($_GET['id'], $dataPaniers, $panierCheck);
 
-    $controller->postAction($_GET['id'], $dataAnnonces, $annoncesCheck);
-
-    $layout = new Layout("gui/layout.html" );
-    $vuePost= new ViewPost( $layout,  $_SESSION['login'], $presenter );
-
-    $vuePost->display();
+    $layout = new Layout("gui/layoutLogged.html");
+    $vuePanier = new ViewPanier($layout, $_SESSION['login'], $presenter);
+    $vuePanier->display();
 }
-elseif ( '/index.php/error' == $uri ){
+elseif ('/index.php/produits' == $uri) {
+    // Affichage de tous les produits
+    // À implémenter : récupération des produits
+    // $controller->produitsAction($dataProduits, $produitsCheck);
+
+    $layout = new Layout("gui/layoutLogged.html");
+    $vueProduits = new ViewProduits($layout, $_SESSION['login'], $presenter);
+    $vueProduits->display();
+}
+elseif ('/index.php/accueil' == $uri) {
+    // Affichage de tous les produits
+    // À implémenter : récupération des produits
+    // $controller->produitsAction($dataProduits, $produitsCheck);
+
+    $layout = new Layout("gui/layoutLogged.html");
+    $vueAcceuil = new ViewAccueil($layout, $_SESSION['login'], $presenter);
+    $vueAcceuil->display();
+}
+elseif ('/index.php/commande' == $uri) {
+    // Validation d'une commande
+    // À implémenter : traitement de la commande
+    // $controller->commandeAction($_SESSION['login'], $_POST, $dataCommandes);
+
+    $layout = new Layout("gui/layoutLogged.html");
+    $vueCommande = new ViewCommande($layout, $_SESSION['login'], $presenter);
+    $vueCommande->display();
+}
+elseif ('/index.php/error' == $uri) {
     // Affichage d'un message d'erreur
-
-    $layout = new Layout("gui/layout.html" );
-    $vueError = new ViewError( $layout, $error, $redirect );
-
+    $layout = new Layout("gui/layout.html");
+    $vueError = new ViewError($layout, $error, $redirect);
     $vueError->display();
 }
-elseif ( '/index.php/annoncesAlternance' == $uri ){
-    // Affichage de toutes les entreprises offrant de l'alternance
-
-    $controller->annoncesAction($apiAlternance, $annoncesCheck);
-
-    $layout = new Layout("gui/layoutLogged.html" );
-    $vueAnnoncesAlternance= new ViewAnnoncesAlternance( $layout,  $_SESSION['login'], $presenter);
-
-    $vueAnnoncesAlternance->display();
-}
-elseif ( '/index.php/annoncesEmploi' == $uri ){
-    // Affichage de toutes les entreprises offrant de l'alternance
-
-    $controller->annoncesAction($apiEmploi, $annoncesCheck);
-
-    $layout = new Layout("gui/layoutLogged.html" );
-    $vueAnnoncesEmploi= new ViewAnnoncesEmploi( $layout,  $_SESSION['login'], $presenter);
-
-    $vueAnnoncesEmploi->display();
-}
-elseif ( '/index.php/offreEmploi' == $uri ){
-    // Affichage de toutes les entreprises offrant de l'alternance
-    $controller->postAction($_GET['id'], $apiEmploi, $annoncesCheck);
-    $layout = new Layout("gui/layoutLogged.html" );
-    $vuePostEmploi = new ViewOffreEmploi($layout,  $_SESSION['login'], $presenter);
-
-    $vuePostEmploi->display();
-}
-elseif ( '/index.php/companyAlternance' == $uri
-    && isset($_GET['id'])) {
-    // Affichage d'une entreprise offrant de l'alternance
-
-    $controller->postAction($_GET['id'], $apiAlternance, $annoncesCheck);
-
-    $layout = new Layout("gui/layoutLogged.html" );
-    $vuePostAlternance = new ViewCompanyAlternance( $layout,  $_SESSION['login'], $presenter );
-
-    $vuePostAlternance->display();
-}
-elseif ('/index.php/createAnnonce' == $uri ){
-    $layout = new Layout("gui/layoutLogged.html" );
-    $vueCreateAnnonce = new ViewCreateAnnonce( $layout);
-    $vueCreateAnnonce->display();
-}
-
 else {
+    // Page non trouvée
     header('Status: 404 Not Found');
-    echo '<html lang="fr"><body><h1>My Page NotFound</h1></body></html>';
+    echo '<html lang="fr"><body><h1>Page non trouvée</h1></body></html>';
 }
-
