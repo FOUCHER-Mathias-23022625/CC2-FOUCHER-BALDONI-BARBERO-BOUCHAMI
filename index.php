@@ -30,6 +30,11 @@ include_once 'data/PanierJsonAccess.php';
 include_once 'service/ProduitChecking.php';
 include_once 'service/PanierChecking.php';
 
+include_once 'data/CommandeJsonAccess.php';
+include_once 'service/CommandeChecking.php';
+include_once 'gui/ViewConfirmation.php';
+include_once 'gui/ViewMesCommandes.php';
+
 use gui\{
     ViewLogin,
     ViewError,
@@ -40,20 +45,26 @@ use gui\{
     ViewProduits,
     ViewCommande,
     ViewAccueil,
+    ViewConfirmation, 
+    ViewMesCommandes,
     Layout
 };
 use control\{Controllers, Presenter};
-use data\{UserJsonAccess, ProduitJsonAccess, PanierJsonAccess};
-use service\{UserChecking, UserCreation, ProduitChecking, PanierChecking};
+use data\{UserJsonAccess, ProduitJsonAccess, PanierJsonAccess, CommandeJsonAccess};
+use service\{UserChecking, UserCreation, ProduitChecking, PanierChecking, CommandeChecking};
+
 
 // Chemin vers le fichier JSON des utilisateurs
 $userJsonPath = 'dataSimulate/user.json';
 $produitJsonPath = 'dataSimulate/produits.json';
 $panierJsonPath = 'dataSimulate/paniers.json';
+$commandeJsonPath = 'dataSimulate/commandes.json';
+
 
 $dataUsers = new UserJsonAccess($userJsonPath);
 $dataProduits = new ProduitJsonAccess($produitJsonPath);
 $dataPaniers = new PanierJsonAccess($panierJsonPath);
+$dataCommandes = new CommandeJsonAccess($commandeJsonPath);
 
 // Initialisation des services
 $controller = new Controllers();
@@ -61,10 +72,12 @@ $userCheck = new UserChecking();
 $userCreation = new UserCreation();
 $produitCheck = new ProduitChecking();
 $panierCheck = new PanierChecking();
+$commandeCheck = new CommandeChecking();
+
 
 
 // Initialisation du presenter (à adapter pour les produits/paniers)
-$presenter = new Presenter(null, $produitCheck, $panierCheck);
+$presenter = new Presenter(null, $produitCheck, $panierCheck, $commandeCheck);
 // Récupération de l'URL
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -191,10 +204,224 @@ elseif ('/index.php/produits' == $uri) {
     $vueProduits = new ViewProduits($layout, $_SESSION['login'], $presenter);
     $vueProduits->display();
 }
+
+elseif (!isset($_SESSION['panier'])) {
+    $_SESSION['panier'] = [
+        'produits' => [],
+        'paniers' => []
+    ];
+}
+
+// Ajouter les routes pour la gestion du panier et des commandes
+elseif ('/index.php/add-to-cart' == $uri && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Ajouter un produit au panier
+    if (isset($_POST['type']) && isset($_POST['id']) && isset($_POST['quantite'])) {
+        $type = $_POST['type'];
+        $id = intval($_POST['id']);
+        $quantite = intval($_POST['quantite']);
+        
+        if ($type === 'produit') {
+            $produit = $dataProduits->getProduit($id);
+            if ($produit) {
+                // Vérifier si le produit est déjà dans le panier
+                $found = false;
+                foreach ($_SESSION['panier']['produits'] as &$item) {
+                    if ($item['id'] == $id) {
+                        $item['quantite'] += $quantite;
+                        $found = true;
+                        break;
+                    }
+                }
+                unset($item); // Détacher la référence
+                
+                // Ajouter le produit si non trouvé
+                if (!$found) {
+                    $_SESSION['panier']['produits'][] = [
+                        'id' => $id,
+                        'nom' => $produit['nom'],
+                        'prix' => $produit['prix'],
+                        'quantite' => $quantite
+                    ];
+                }
+            }
+        } elseif ($type === 'panier') {
+            $panier = $dataPaniers->getPanier($id);
+            if ($panier) {
+                // Vérifier si le panier est déjà dans la commande
+                $found = false;
+                foreach ($_SESSION['panier']['paniers'] as &$item) {
+                    if ($item['id'] == $id) {
+                        $item['quantite'] += $quantite;
+                        $found = true;
+                        break;
+                    }
+                }
+                unset($item); // Détacher la référence
+                
+                // Ajouter le panier si non trouvé
+                if (!$found) {
+                    $_SESSION['panier']['paniers'][] = [
+                        'id' => $id,
+                        'nom' => $panier['nom'],
+                        'prix' => $panier['prix'],
+                        'quantite' => $quantite
+                    ];
+                }
+            }
+        }
+        
+        // Rediriger vers la page de commande
+        header('Location: /index.php/commande');
+        exit;
+    }
+}
+
+elseif ('/index.php/add-to-cart-ajax' == $uri && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Initialiser le panier s'il n'existe pas
+    if (!isset($_SESSION['panier'])) {
+        $_SESSION['panier'] = [
+            'produits' => [],
+            'paniers' => []
+        ];
+    }
+    
+    // Récupérer les données
+    $type = $_POST['type'] ?? 'produit';
+    $id = intval($_POST['id'] ?? 0);
+    $quantite = intval($_POST['quantite'] ?? 1);
+    
+    if ($id > 0 && $quantite > 0) {
+        if ($type === 'produit') {
+            $produit = $dataProduits->getProduit($id);
+            if ($produit) {
+                // Vérifier si le produit est déjà dans le panier
+                $found = false;
+                foreach ($_SESSION['panier']['produits'] as &$item) {
+                    if ($item['id'] == $id) {
+                        $item['quantite'] += $quantite;
+                        $found = true;
+                        break;
+                    }
+                }
+                unset($item); // Détacher la référence
+                
+                // Ajouter le produit si non trouvé
+                if (!$found) {
+                    $_SESSION['panier']['produits'][] = [
+                        'id' => $id,
+                        'nom' => $produit['nom'],
+                        'prix' => $produit['prix'],
+                        'quantite' => $quantite
+                    ];
+                }
+            }
+        } elseif ($type === 'panier') {
+            $panier = $dataPaniers->getPanier($id);
+            if ($panier) {
+                // Vérifier si le panier est déjà dans la commande
+                $found = false;
+                foreach ($_SESSION['panier']['paniers'] as &$item) {
+                    if ($item['id'] == $id) {
+                        $item['quantite'] += $quantite;
+                        $found = true;
+                        break;
+                    }
+                }
+                unset($item); // Détacher la référence
+                
+                // Ajouter le panier si non trouvé
+                if (!$found) {
+                    $_SESSION['panier']['paniers'][] = [
+                        'id' => $id,
+                        'nom' => $panier['nom'],
+                        'prix' => $panier['prix'],
+                        'quantite' => $quantite
+                    ];
+                }
+            }
+        }
+    }
+    
+    // Calculer le nombre total d'articles dans le panier
+    $cartCount = 0;
+    foreach ($_SESSION['panier']['produits'] as $produit) {
+        $cartCount += $produit['quantite'];
+    }
+    foreach ($_SESSION['panier']['paniers'] as $panier) {
+        $cartCount += $panier['quantite'];
+    }
+    
+    // Retourner une réponse JSON
+    header('Content-Type: application/json');
+    echo json_encode(['success' => true, 'count' => $cartCount]);
+    exit;
+}
+elseif ('/index.php/confirmation' == $uri && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Traitement de la validation de commande
+    if (isset($_POST['relai']) && isset($_POST['date']) && isset($_POST['heure']) && isset($_POST['total'])) {
+        // Préparation des données de commande
+        $commandeData = [
+            'relai' => $_POST['relai'],
+            'date' => $_POST['date'],
+            'heure' => $_POST['heure'],
+            'produits' => $_SESSION['panier']['produits'],
+            'paniers' => $_SESSION['panier']['paniers'],
+            'total' => floatval($_POST['total'])
+        ];
+        
+        // Création de la commande
+        $commandeId = $commandeCheck->createCommande($_SESSION['login'], $commandeData, $dataCommandes);
+        
+        // Mise à jour des stocks
+        foreach ($_SESSION['panier']['produits'] as $produit) {
+            $dataProduits->updateStock($produit['id'], $produit['quantite']);
+        }
+        
+        foreach ($_SESSION['panier']['paniers'] as $panier) {
+            $dataPaniers->updateStock($panier['id'], $panier['quantite']);
+        }
+        
+        // Vider le panier
+        $_SESSION['panier'] = [
+            'produits' => [],
+            'paniers' => []
+        ];
+        
+        // Afficher la page de confirmation
+        $layout = new Layout("gui/layoutLogged.html");
+        $vueConfirmation = new ViewConfirmation($layout, $_SESSION['login'], $commandeId);
+        $vueConfirmation->display();
+        exit;
+    } else {
+        // Rediriger vers la page de commande en cas d'erreur
+        header('Location: /index.php/commande');
+        exit;
+    }
+}
+elseif ('/index.php/mes-commandes' == $uri) {
+    // Afficher les commandes de l'utilisateur connecté
+    $commandeCheck->getCommandesByUser($_SESSION['login'], $dataCommandes);
+    
+    $layout = new Layout("gui/layoutLogged.html");
+    $vueMesCommandes = new ViewMesCommandes($layout, $_SESSION['login'], $presenter);
+    $vueMesCommandes->display();
+}
+elseif ('/index.php/detail-commande' == $uri && isset($_GET['id'])) {
+    // Afficher le détail d'une commande
+    $commandeCheck->getCommande($_GET['id'], $dataCommandes);
+    
+    // Si l'utilisateur essaie d'accéder à une commande qui n'est pas la sienne
+    if (empty($commandeCheck->getCommandesTxt()) || $commandeCheck->getCommandesTxt()[0]['login'] !== $_SESSION['login']) {
+        header('Location: /index.php/mes-commandes');
+        exit;
+    }
+    
+    $layout = new Layout("gui/layoutLogged.html");
+    $vueDetailCommande = new ViewDetailCommande($layout, $_SESSION['login'], $presenter);
+    $vueDetailCommande->display();
+}
 elseif ('/index.php/commande' == $uri) {
     // Validation d'une commande
-    // $controller->commandeAction($_SESSION['login'], $_POST, $dataCommandes);
-    
     $layout = new Layout("gui/layoutLogged.html");
     $vueCommande = new ViewCommande($layout, $_SESSION['login'], $presenter);
     $vueCommande->display();

@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "login": "marie.dupont",
+        "date": "2025-03-25 14:30:22",
+        "status": "Validée",
+        "relai": "Coopérative principale - Aix-en-Provence",
+        "dateRetrait": "2025-03-28",
+        "heureRetrait": "14:00 - 15:00",
+        "produits": [],
+        "paniers": [
+            {"id": 1, "nom": "Panier Fruits & Légumes", "quantite": 1, "prix": 18.50}
+        ],
+        "total": 18.50
+    },
+    {
+        "id": 2,
+        "login": "thomas.laurent",
+        "date": "2025-03-26 09:15:43",
+        "status": "En préparation",
+        "relai": "Marché de Pertuis",
+        "dateRetrait": "2025-03-30",
+        "heureRetrait": "11:00 - 12:00",
+        "produits": [
+            {"id": 6, "nom": "Pommes", "quantite": 2, "prix": 3.20},
+            {"id": 10, "nom": "Fromage de chèvre", "quantite": 3, "prix": 5.80}
+        ],
+        "paniers": [],
+        "total": 23.80
+    },
+    {
+        "id": 3,
+        "login": "sophie.martin",
+        "date": "2025-03-27 16:45:12",
+        "status": "En attente",
+        "relai": "Épicerie Bio - Marseille",
+        "dateRetrait": "2025-04-01",
+        "heureRetrait": "16:00 - 17:00",
+        "produits": [],
+        "paniers": [
+            {"id": 3, "nom": "Panier Complet", "quantite": 1, "prix": 32.00},
+            {"id": 5, "nom": "Panier Apéritif", "quantite": 1, "prix": 29.90}
+        ],
+        "total": 61.90
+    }
+]

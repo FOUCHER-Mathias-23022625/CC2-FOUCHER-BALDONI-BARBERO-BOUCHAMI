@@ -1,103 +1,271 @@
-    [
-        {
+[
+    {
         "id": 1,
-        "nom": "Panier Fruits & Légumes",
-        "description": "Panier de saison comprenant des fruits et légumes frais cultivés sans pesticides.",
-        "prix": 18.50,
+        "nom": "Panier Fruits & L\u00e9gumes",
+        "description": "Panier de saison comprenant des fruits et l\u00e9gumes frais cultiv\u00e9s sans pesticides.",
+        "prix": 18.5,
         "dateMAJ": "2025-03-28",
-        "stock": 15,
-        "image": "https://images.unsplash.com/photo-1607305387299-a3d9611cd469?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        "stock": 12,
+        "image": "https:\/\/images.unsplash.com\/photo-1607305387299-a3d9611cd469?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
         "contenu": [
-            {"produitId": 1, "nom": "Tomates", "quantite": 0.5, "unite": "kg"},
-            {"produitId": 3, "nom": "Pommes de terre", "quantite": 1, "unite": "kg"},
-            {"produitId": 6, "nom": "Pommes", "quantite": 0.5, "unite": "kg"},
-            {"produitId": 5, "nom": "Salade", "quantite": 1, "unite": "pièce"},
-            {"produitId": 4, "nom": "Courgettes", "quantite": 0.5, "unite": "kg"}
+            {
+                "produitId": 1,
+                "nom": "Tomates",
+                "quantite": 0.5,
+                "unite": "kg"
+            },
+            {
+                "produitId": 3,
+                "nom": "Pommes de terre",
+                "quantite": 1,
+                "unite": "kg"
+            },
+            {
+                "produitId": 6,
+                "nom": "Pommes",
+                "quantite": 0.5,
+                "unite": "kg"
+            },
+            {
+                "produitId": 5,
+                "nom": "Salade",
+                "quantite": 1,
+                "unite": "pi\u00e8ce"
+            },
+            {
+                "produitId": 4,
+                "nom": "Courgettes",
+                "quantite": 0.5,
+                "unite": "kg"
+            }
         ]
-        },
-        {
+    },
+    {
         "id": 2,
         "nom": "Panier Fromages",
-        "description": "Assortiment de fromages locaux et artisanaux pour les amateurs de produits laitiers de qualité.",
-        "prix": 22.00,
+        "description": "Assortiment de fromages locaux et artisanaux pour les amateurs de produits laitiers de qualit\u00e9.",
+        "prix": 22,
         "dateMAJ": "2025-03-29",
-        "stock": 10,
-        "image": "https://images.unsplash.com/photo-1452195100486-9cc805987862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+        "stock": 6,
+        "image": "https:\/\/images.unsplash.com\/photo-1452195100486-9cc805987862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
         "contenu": [
-            {"produitId": 10, "nom": "Fromage de chèvre", "quantite": 2, "unite": "pièces"},
-            {"produitNom": "Fromage de brebis", "quantite": 1, "unite": "pièce"},
-            {"produitNom": "Bleu d'Auvergne", "quantite": 200, "unite": "grammes"},
-            {"produitNom": "Camembert fermier", "quantite": 1, "unite": "pièce"}
+            {
+                "produitId": 10,
+                "nom": "Fromage de ch\u00e8vre",
+                "quantite": 2,
+                "unite": "pi\u00e8ces"
+            },
+            {
+                "produitNom": "Fromage de brebis",
+                "quantite": 1,
+                "unite": "pi\u00e8ce"
+            },
+            {
+                "produitNom": "Bleu d'Auvergne",
+                "quantite": 200,
+                "unite": "grammes"
+            },
+            {
+                "produitNom": "Camembert fermier",
+                "quantite": 1,
+                "unite": "pi\u00e8ce"
+            }
         ]
-        },
-        {
+    },
+    {
         "id": 3,
         "nom": "Panier Complet",
-        "description": "Un assortiment complet de produits frais : fruits, légumes, œufs et produits laitiers pour une semaine équilibrée.",
-        "prix": 32.00,
+        "description": "Un assortiment complet de produits frais : fruits, l\u00e9gumes, \u0153ufs et produits laitiers pour une semaine \u00e9quilibr\u00e9e.",
+        "prix": 32,
         "dateMAJ": "2025-03-30",
-        "stock": 8,
-        "image": "https://images.unsplash.com/photo-1591086229468-66cd1f968fdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        "stock": 6,
+        "image": "https:\/\/images.unsplash.com\/photo-1591086229468-66cd1f968fdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
         "contenu": [
-            {"produitId": 1, "nom": "Tomates", "quantite": 1, "unite": "kg"},
-            {"produitId": 9, "nom": "Œufs fermiers", "quantite": 1, "unite": "douzaine"},
-            {"produitId": 10, "nom": "Fromage de chèvre", "quantite": 1, "unite": "pièce"},
-            {"produitId": 6, "nom": "Pommes", "quantite": 1, "unite": "kg"},
-            {"produitId": 11, "nom": "Yaourt nature", "quantite": 1, "unite": "pack de 4"},
-            {"produitId": 5, "nom": "Salade", "quantite": 1, "unite": "pièce"},
-            {"produitNom": "Radis", "quantite": 1, "unite": "botte"}
+            {
+                "produitId": 1,
+                "nom": "Tomates",
+                "quantite": 1,
+                "unite": "kg"
+            },
+            {
+                "produitId": 9,
+                "nom": "\u0152ufs fermiers",
+                "quantite": 1,
+                "unite": "douzaine"
+            },
+            {
+                "produitId": 10,
+                "nom": "Fromage de ch\u00e8vre",
+                "quantite": 1,
+                "unite": "pi\u00e8ce"
+            },
+            {
+                "produitId": 6,
+                "nom": "Pommes",
+                "quantite": 1,
+                "unite": "kg"
+            },
+            {
+                "produitId": 11,
+                "nom": "Yaourt nature",
+                "quantite": 1,
+                "unite": "pack de 4"
+            },
+            {
+                "produitId": 5,
+                "nom": "Salade",
+                "quantite": 1,
+                "unite": "pi\u00e8ce"
+            },
+            {
+                "produitNom": "Radis",
+                "quantite": 1,
+                "unite": "botte"
+            }
         ]
-        },
-        {
+    },
+    {
         "id": 4,
-        "nom": "Panier Petit-déjeuner",
-        "description": "Tout ce qu'il faut pour un petit-déjeuner gourmand et sain : pain, miel, confitures, yaourts et fruits.",
-        "prix": 25.50,
+        "nom": "Panier Petit-d\u00e9jeuner",
+        "description": "Tout ce qu'il faut pour un petit-d\u00e9jeuner gourmand et sain : pain, miel, confitures, yaourts et fruits.",
+        "prix": 25.5,
         "dateMAJ": "2025-03-25",
-        "stock": 12,
-        "image": "https://images.unsplash.com/photo-1509365465985-25d11c17e812?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        "stock": 10,
+        "image": "https:\/\/images.unsplash.com\/photo-1509365465985-25d11c17e812?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
         "contenu": [
-            {"produitId": 13, "nom": "Pain complet", "quantite": 1, "unite": "pièce"},
-            {"produitId": 12, "nom": "Miel de lavande", "quantite": 1, "unite": "pot"},
-            {"produitId": 15, "nom": "Confitures assorties", "quantite": 1, "unite": "coffret"},
-            {"produitId": 11, "nom": "Yaourt nature", "quantite": 1, "unite": "pack de 4"},
-            {"produitId": 6, "nom": "Pommes", "quantite": 0.5, "unite": "kg"},
-            {"produitId": 7, "nom": "Poires", "quantite": 0.5, "unite": "kg"}
+            {
+                "produitId": 13,
+                "nom": "Pain complet",
+                "quantite": 1,
+                "unite": "pi\u00e8ce"
+            },
+            {
+                "produitId": 12,
+                "nom": "Miel de lavande",
+                "quantite": 1,
+                "unite": "pot"
+            },
+            {
+                "produitId": 15,
+                "nom": "Confitures assorties",
+                "quantite": 1,
+                "unite": "coffret"
+            },
+            {
+                "produitId": 11,
+                "nom": "Yaourt nature",
+                "quantite": 1,
+                "unite": "pack de 4"
+            },
+            {
+                "produitId": 6,
+                "nom": "Pommes",
+                "quantite": 0.5,
+                "unite": "kg"
+            },
+            {
+                "produitId": 7,
+                "nom": "Poires",
+                "quantite": 0.5,
+                "unite": "kg"
+            }
         ]
-        },
-        {
+    },
+    {
         "id": 5,
-        "nom": "Panier Apéritif",
-        "description": "Un assortiment parfait pour vos apéritifs entre amis : fromages, pain, huile d'olive et fruits secs.",
-        "prix": 29.90,
+        "nom": "Panier Ap\u00e9ritif",
+        "description": "Un assortiment parfait pour vos ap\u00e9ritifs entre amis : fromages, pain, huile d'olive et fruits secs.",
+        "prix": 29.9,
         "dateMAJ": "2025-03-26",
-        "stock": 7,
-        "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+        "stock": 5,
+        "image": "https:\/\/images.unsplash.com\/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
         "contenu": [
-            {"produitId": 10, "nom": "Fromage de chèvre", "quantite": 1, "unite": "pièce"},
-            {"produitId": 13, "nom": "Pain complet", "quantite": 1, "unite": "pièce"},
-            {"produitId": 14, "nom": "Huile d'olive", "quantite": 1, "unite": "bouteille"},
-            {"produitNom": "Tapenade", "quantite": 1, "unite": "pot"},
-            {"produitNom": "Fruits secs assortis", "quantite": 200, "unite": "grammes"},
-            {"produitNom": "Olives marinées", "quantite": 150, "unite": "grammes"}
+            {
+                "produitId": 10,
+                "nom": "Fromage de ch\u00e8vre",
+                "quantite": 1,
+                "unite": "pi\u00e8ce"
+            },
+            {
+                "produitId": 13,
+                "nom": "Pain complet",
+                "quantite": 1,
+                "unite": "pi\u00e8ce"
+            },
+            {
+                "produitId": 14,
+                "nom": "Huile d'olive",
+                "quantite": 1,
+                "unite": "bouteille"
+            },
+            {
+                "produitNom": "Tapenade",
+                "quantite": 1,
+                "unite": "pot"
+            },
+            {
+                "produitNom": "Fruits secs assortis",
+                "quantite": 200,
+                "unite": "grammes"
+            },
+            {
+                "produitNom": "Olives marin\u00e9es",
+                "quantite": 150,
+                "unite": "grammes"
+            }
         ]
-        },
-        {
+    },
+    {
         "id": 6,
-        "nom": "Panier Végétarien",
-        "description": "Spécialement conçu pour les végétariens : légumes variés, fromages, huile d'olive et pain.",
-        "prix": 27.50,
+        "nom": "Panier V\u00e9g\u00e9tarien",
+        "description": "Sp\u00e9cialement con\u00e7u pour les v\u00e9g\u00e9tariens : l\u00e9gumes vari\u00e9s, fromages, huile d'olive et pain.",
+        "prix": 27.5,
         "dateMAJ": "2025-03-27",
-        "stock": 9,
-        "image": "https://images.unsplash.com/photo-1610348725531-843dff563e2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        "stock": 6,
+        "image": "https:\/\/images.unsplash.com\/photo-1610348725531-843dff563e2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
         "contenu": [
-            {"produitId": 1, "nom": "Tomates", "quantite": 0.5, "unite": "kg"},
-            {"produitId": 2, "nom": "Carottes", "quantite": 0.5, "unite": "kg"},
-            {"produitId": 4, "nom": "Courgettes", "quantite": 0.5, "unite": "kg"},
-            {"produitId": 5, "nom": "Salade", "quantite": 1, "unite": "pièce"},
-            {"produitId": 10, "nom": "Fromage de chèvre", "quantite": 1, "unite": "pièce"},
-            {"produitId": 13, "nom": "Pain complet", "quantite": 1, "unite": "pièce"},
-            {"produitId": 14, "nom": "Huile d'olive", "quantite": 1, "unite": "bouteille"}
+            {
+                "produitId": 1,
+                "nom": "Tomates",
+                "quantite": 0.5,
+                "unite": "kg"
+            },
+            {
+                "produitId": 2,
+                "nom": "Carottes",
+                "quantite": 0.5,
+                "unite": "kg"
+            },
+            {
+                "produitId": 4,
+                "nom": "Courgettes",
+                "quantite": 0.5,
+                "unite": "kg"
+            },
+            {
+                "produitId": 5,
+                "nom": "Salade",
+                "quantite": 1,
+                "unite": "pi\u00e8ce"
+            },
+            {
+                "produitId": 10,
+                "nom": "Fromage de ch\u00e8vre",
+                "quantite": 1,
+                "unite": "pi\u00e8ce"
+            },
+            {
+                "produitId": 13,
+                "nom": "Pain complet",
+                "quantite": 1,
+                "unite": "pi\u00e8ce"
+            },
+            {
+                "produitId": 14,
+                "nom": "Huile d'olive",
+                "quantite": 1,
+                "unite": "bouteille"
+            }
         ]
-        }
-    ]
+    }
+]

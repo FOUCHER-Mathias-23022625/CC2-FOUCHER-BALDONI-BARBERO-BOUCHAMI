@@ -1,0 +1,75 @@
+[
+    {
+        "id": 1,
+        "login": "admin",
+        "date": "2025-04-01 12:55:08",
+        "status": "En attente",
+        "relai": "Coop\u00e9rative principale - Aix-en-Provence",
+        "dateRetrait": "2025-04-10",
+        "heureRetrait": "11:00 - 12:00",
+        "produits": [],
+        "paniers": [],
+        "total": 0
+    },
+    {
+        "id": 2,
+        "login": "admin",
+        "date": "2025-04-01 13:06:05",
+        "status": "En attente",
+        "relai": "Coop\u00e9rative principale - Aix-en-Provence",
+        "dateRetrait": "2025-04-26",
+        "heureRetrait": "16:00 - 17:00",
+        "produits": [],
+        "paniers": [
+            {
+                "id": 2,
+                "nom": "Panier Fromages",
+                "prix": 22,
+                "quantite": 4
+            },
+            {
+                "id": 1,
+                "nom": "Panier Fruits & L\u00e9gumes",
+                "prix": 18.5,
+                "quantite": 3
+            },
+            {
+                "id": 3,
+                "nom": "Panier Complet",
+                "prix": 32,
+                "quantite": 2
+            },
+            {
+                "id": 4,
+                "nom": "Panier Petit-d\u00e9jeuner",
+                "prix": 25.5,
+                "quantite": 2
+            },
+            {
+                "id": 6,
+                "nom": "Panier V\u00e9g\u00e9tarien",
+                "prix": 27.5,
+                "quantite": 3
+            },
+            {
+                "id": 5,
+                "nom": "Panier Ap\u00e9ritif",
+                "prix": 29.9,
+                "quantite": 2
+            }
+        ],
+        "total": 400.8
+    },
+    {
+        "id": 3,
+        "login": "admin",
+        "date": "2025-04-01 13:07:11",
+        "status": "En attente",
+        "relai": "Coop\u00e9rative principale - Aix-en-Provence",
+        "dateRetrait": "2025-04-26",
+        "heureRetrait": "16:00 - 17:00",
+        "produits": [],
+        "paniers": [],
+        "total": 400.8
+    }
+]

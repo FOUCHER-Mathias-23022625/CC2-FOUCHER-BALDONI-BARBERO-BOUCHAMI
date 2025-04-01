@@ -8,13 +8,16 @@ class Presenter
     protected $annoncesCheck;
     protected $produitCheck;
     protected $panierCheck;
+    protected $commandeCheck;
 
-    public function __construct($annoncesCheck = null, $produitCheck = null, $panierCheck = null)
-    {
-        $this->annoncesCheck = $annoncesCheck;
-        $this->produitCheck = $produitCheck;
-        $this->panierCheck = $panierCheck;
-    }
+
+    public function __construct($annoncesCheck = null, $produitCheck = null, $panierCheck = null, $commandeCheck = null)
+{
+    $this->annoncesCheck = $annoncesCheck;
+    $this->produitCheck = $produitCheck;
+    $this->panierCheck = $panierCheck;
+    $this->commandeCheck = $commandeCheck;
+}
 
     // Méthodes existantes...
 
@@ -37,7 +40,7 @@ class Presenter
                         <input type="number" value="1" min="1" max="' . htmlspecialchars($produit['stock']) . '">
                         <button onclick="updateQuantity(this, 1)">+</button>
                     </div>
-                    <button class="add-to-cart" data-id="' . htmlspecialchars($produit['id']) . '">Ajouter au panier</button>
+                    <button class="add-to-cart" data-id="' . htmlspecialchars($produit['id']) . '" data-type="produit">Ajouter au panier</button>
                 </div>';
             }
         } else {
@@ -66,7 +69,7 @@ class Presenter
                     </div>
                     <div class="panier-price">' . number_format($panier['prix'], 2, ',', ' ') . ' €</div>
                     <a href="/index.php/panier?id=' . htmlspecialchars($panier['id']) . '" class="view-details">Voir le détail</a>
-                    <button class="add-to-cart" data-id="' . htmlspecialchars($panier['id']) . '">Ajouter au panier</button>
+                    <button class="add-to-cart" data-id="' . htmlspecialchars($panier['id']) . '" data-type="panier">Ajouter au panier</button>
                 </div>';
             }
         } else {
@@ -123,11 +126,69 @@ class Presenter
             </div>
             
             <div class="action-buttons">
-                <button class="add-to-cart" data-id="' . htmlspecialchars($panier['id']) . '">Ajouter au panier</button>
+                <button class="add-to-cart" data-id="' . htmlspecialchars($panier['id']) . '" data-type="panier">Ajouter au panier</button>
                 <a href="/index.php/paniers" class="back-button">Retour aux paniers</a>
             </div>
         </div>';
         
         return $content;
     }
+    public function getMesCommandesHTML()
+{
+    $content = '<h1>Mes commandes</h1>';
+    
+    if ($this->commandeCheck && !empty($this->commandeCheck->getCommandesTxt())) {
+        $content .= '
+        <div class="commandes-container">
+            <table class="commandes-table">
+                <thead>
+                    <tr>
+                        <th>N° Commande</th>
+                        <th>Date</th>
+                        <th>Point de retrait</th>
+                        <th>Date & Heure de retrait</th>
+                        <th>Montant</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>';
+        
+        foreach ($this->commandeCheck->getCommandesTxt() as $commande) {
+            $statut_class = '';
+            switch ($commande['status']) {
+                case 'Validée':
+                    $statut_class = 'status-validated';
+                    break;
+                case 'En préparation':
+                    $statut_class = 'status-preparing';
+                    break;
+                case 'En attente':
+                    $statut_class = 'status-pending';
+                    break;
+            }
+            
+            $content .= '
+                <tr>
+                    <td>#' . htmlspecialchars($commande['id']) . '</td>
+                    <td>' . htmlspecialchars($commande['date']) . '</td>
+                    <td>' . htmlspecialchars($commande['relai']) . '</td>
+                    <td>' . htmlspecialchars($commande['dateRetrait']) . ' à ' . htmlspecialchars($commande['heureRetrait']) . '</td>
+                    <td>' . number_format($commande['total'], 2, ',', ' ') . ' €</td>
+                    <td><span class="status ' . $statut_class . '">' . htmlspecialchars($commande['status']) . '</span></td>
+                    <td><a href="/index.php/detail-commande?id=' . htmlspecialchars($commande['id']) . '" class="view-button">Détails</a></td>
+                </tr>';
+        }
+        
+        $content .= '
+                </tbody>
+            </table>
+        </div>';
+    } else {
+        $content .= '<p class="no-commandes">Vous n\'avez pas encore passé de commande.</p>';
+        $content .= '<div class="action-buttons"><a href="/index.php/paniers" class="back-button">Voir les paniers</a></div>';
+    }
+    
+    return $content;
+}
 }
