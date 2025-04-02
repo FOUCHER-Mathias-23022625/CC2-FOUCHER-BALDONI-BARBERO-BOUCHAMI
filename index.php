@@ -28,7 +28,7 @@ include_once 'data/PanierJsonAccess.php';
 include_once 'service/ProduitChecking.php';
 include_once 'service/PanierChecking.php';
 
-include_once 'data/CommandeJsonAccess.php';
+include_once 'data/CommandeApiAccess.php';
 include_once 'service/CommandeChecking.php';
 include_once 'gui/ViewConfirmation.php';
 include_once 'gui/ViewMesCommandes.php';
@@ -59,14 +59,13 @@ use service\{UserChecking, UserCreation, ProduitChecking, PanierChecking, Comman
 $userApiUrl = 'http://localhost:9080/UserProduit-1.0-SNAPSHOT/api/user'; // URL de l'API utilisateurs
 $panierApiUrl = 'http://localhost:8080/paniers-1.0-SNAPSHOT/api/paniers'; // URL de l'API paniers
 $produitApiUrl = 'http://localhost:9080/UserProduit-1.0-SNAPSHOT/api/produit'; // URL de l'API produits
-$commandeJsonPath = 'dataSimulate/commandes.json'; // Fichier JSON pour les commandes
+$commandeApiUrl = 'http://localhost:7080/apiCommandes-1.0-SNAPSHOT/api/commandes'; // URL de l'API commandes
 
-// Initialisation des accès aux données
 $dataUsers = new UserApiAccess($userApiUrl);
 $dataPaniersProduits = new PanierApiAccess($panierApiUrl, $produitApiUrl);
 $dataPaniers = $dataPaniersProduits;
 $dataProduits = $dataPaniersProduits; // Même si on ne vend pas de produits individuellement, on garde cette référence pour compatibilité
-$dataCommandes = new CommandeJsonAccess($commandeJsonPath);
+$dataCommandes = new CommandeApiAccess($commandeApiUrl);
 
 // Initialisation des services
 $controller = new Controllers();
@@ -216,59 +215,32 @@ elseif (!isset($_SESSION['panier'])) {
 
 // Ajouter les routes pour la gestion du panier et des commandes
 elseif ('/index.php/add-to-cart' == $uri && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Ajouter un produit au panier
-    if (isset($_POST['type']) && isset($_POST['id']) && isset($_POST['quantite'])) {
-        $type = $_POST['type'];
-        $id = intval($_POST['id']);
+    // Ajouter un panier au panier
+    if (isset($_POST['id']) && isset($_POST['quantite'])) {
+        $id = $_POST['id'];
         $quantite = intval($_POST['quantite']);
         
-        if ($type === 'produit') {
-            $produit = $dataProduits->getProduit($id);
-            if ($produit) {
-                // Vérifier si le produit est déjà dans le panier
-                $found = false;
-                foreach ($_SESSION['panier']['produits'] as &$item) {
-                    if ($item['id'] == $id) {
-                        $item['quantite'] += $quantite;
-                        $found = true;
-                        break;
-                    }
-                }
-                unset($item); // Détacher la référence
-                
-                // Ajouter le produit si non trouvé
-                if (!$found) {
-                    $_SESSION['panier']['produits'][] = [
-                        'id' => $id,
-                        'nom' => $produit['nom'],
-                        'prix' => $produit['prix'],
-                        'quantite' => $quantite
-                    ];
+        $panier = $dataPaniers->getPanier($id);
+        if ($panier) {
+            // Vérifier si le panier est déjà dans la commande
+            $found = false;
+            foreach ($_SESSION['panier']['paniers'] as &$item) {
+                if ($item['id'] == $id) {
+                    $item['quantite'] += $quantite;
+                    $found = true;
+                    break;
                 }
             }
-        } elseif ($type === 'panier') {
-            $panier = $dataPaniers->getPanier($id);
-            if ($panier) {
-                // Vérifier si le panier est déjà dans la commande
-                $found = false;
-                foreach ($_SESSION['panier']['paniers'] as &$item) {
-                    if ($item['id'] == $id) {
-                        $item['quantite'] += $quantite;
-                        $found = true;
-                        break;
-                    }
-                }
-                unset($item); // Détacher la référence
-                
-                // Ajouter le panier si non trouvé
-                if (!$found) {
-                    $_SESSION['panier']['paniers'][] = [
-                        'id' => $id,
-                        'nom' => $panier['nom'],
-                        'prix' => $panier['prix'],
-                        'quantite' => $quantite
-                    ];
-                }
+            unset($item); // Détacher la référence
+            
+            // Ajouter le panier si non trouvé
+            if (!$found) {
+                $_SESSION['panier']['paniers'][] = [
+                    'id' => $id,
+                    'nom' => $panier['nom'],
+                    'prix' => $panier['prix'],
+                    'quantite' => $quantite
+                ];
             }
         }
         
@@ -282,73 +254,42 @@ elseif ('/index.php/add-to-cart-ajax' == $uri && $_SERVER['REQUEST_METHOD'] === 
     // Initialiser le panier s'il n'existe pas
     if (!isset($_SESSION['panier'])) {
         $_SESSION['panier'] = [
-            'produits' => [],
-            'paniers' => []
+            'paniers' => [] // Uniquement les paniers
         ];
     }
     
     // Récupérer les données
-    $type = $_POST['type'] ?? 'produit';
-    $id = intval($_POST['id'] ?? 0);
+    $id = $_POST['id'] ?? '';
     $quantite = intval($_POST['quantite'] ?? 1);
     
-    if ($id > 0 && $quantite > 0) {
-        if ($type === 'produit') {
-            $produit = $dataProduits->getProduit($id);
-            if ($produit) {
-                // Vérifier si le produit est déjà dans le panier
-                $found = false;
-                foreach ($_SESSION['panier']['produits'] as &$item) {
-                    if ($item['id'] == $id) {
-                        $item['quantite'] += $quantite;
-                        $found = true;
-                        break;
-                    }
-                }
-                unset($item); // Détacher la référence
-                
-                // Ajouter le produit si non trouvé
-                if (!$found) {
-                    $_SESSION['panier']['produits'][] = [
-                        'id' => $id,
-                        'nom' => $produit['nom'],
-                        'prix' => $produit['prix'],
-                        'quantite' => $quantite
-                    ];
+    if ($id && $quantite > 0) {
+        $panier = $dataPaniers->getPanier($id);
+        if ($panier) {
+            // Vérifier si le panier est déjà dans la commande
+            $found = false;
+            foreach ($_SESSION['panier']['paniers'] as &$item) {
+                if ($item['id'] == $id) {
+                    $item['quantite'] += $quantite;
+                    $found = true;
+                    break;
                 }
             }
-        } elseif ($type === 'panier') {
-            $panier = $dataPaniers->getPanier($id);
-            if ($panier) {
-                // Vérifier si le panier est déjà dans la commande
-                $found = false;
-                foreach ($_SESSION['panier']['paniers'] as &$item) {
-                    if ($item['id'] == $id) {
-                        $item['quantite'] += $quantite;
-                        $found = true;
-                        break;
-                    }
-                }
-                unset($item); // Détacher la référence
-                
-                // Ajouter le panier si non trouvé
-                if (!$found) {
-                    $_SESSION['panier']['paniers'][] = [
-                        'id' => $id,
-                        'nom' => $panier['nom'],
-                        'prix' => $panier['prix'],
-                        'quantite' => $quantite
-                    ];
-                }
+            unset($item); // Détacher la référence
+            
+            // Ajouter le panier si non trouvé
+            if (!$found) {
+                $_SESSION['panier']['paniers'][] = [
+                    'id' => $id,
+                    'nom' => $panier['nom'],
+                    'prix' => $panier['prix'],
+                    'quantite' => $quantite
+                ];
             }
         }
     }
     
     // Calculer le nombre total d'articles dans le panier
     $cartCount = 0;
-    foreach ($_SESSION['panier']['produits'] as $produit) {
-        $cartCount += $produit['quantite'];
-    }
     foreach ($_SESSION['panier']['paniers'] as $panier) {
         $cartCount += $panier['quantite'];
     }
@@ -358,6 +299,7 @@ elseif ('/index.php/add-to-cart-ajax' == $uri && $_SERVER['REQUEST_METHOD'] === 
     echo json_encode(['success' => true, 'count' => $cartCount]);
     exit;
 }
+
 elseif ('/index.php/confirmation' == $uri && $_SERVER['REQUEST_METHOD'] === 'POST') {
     // Traitement de la validation de commande
     if (isset($_POST['relai']) && isset($_POST['date']) && isset($_POST['heure']) && isset($_POST['total'])) {
@@ -366,26 +308,20 @@ elseif ('/index.php/confirmation' == $uri && $_SERVER['REQUEST_METHOD'] === 'POS
             'relai' => $_POST['relai'],
             'date' => $_POST['date'],
             'heure' => $_POST['heure'],
-            'produits' => $_SESSION['panier']['produits'],
             'paniers' => $_SESSION['panier']['paniers'],
             'total' => floatval($_POST['total'])
         ];
         
-        // Création de la commande
+        // Création de la commande avec la nouvelle API
         $commandeId = $commandeCheck->createCommande($_SESSION['login'], $commandeData, $dataCommandes);
         
-        // Mise à jour des stocks
-        foreach ($_SESSION['panier']['produits'] as $produit) {
-            $dataProduits->updateStock($produit['id'], $produit['quantite']);
-        }
-        
+        // Mise à jour des stocks des paniers
         foreach ($_SESSION['panier']['paniers'] as $panier) {
             $dataPaniers->updateStock($panier['id'], $panier['quantite']);
         }
         
         // Vider le panier
         $_SESSION['panier'] = [
-            'produits' => [],
             'paniers' => []
         ];
         
@@ -400,6 +336,7 @@ elseif ('/index.php/confirmation' == $uri && $_SERVER['REQUEST_METHOD'] === 'POS
         exit;
     }
 }
+
 elseif ('/index.php/mes-commandes' == $uri) {
     // Afficher les commandes de l'utilisateur connecté
     $commandeCheck->getCommandesByUser($_SESSION['login'], $dataCommandes);
