@@ -50,11 +50,12 @@ use gui\{
     Layout
 };
 use control\{Controllers, Presenter};
-use data\{UserApiAccess, ProduitJsonAccess, PanierJsonAccess, CommandeJsonAccess};
+use data\{UserApiAccess, ProduitJsonAccess, PanierApiAccess, CommandeJsonAccess};
 use service\{UserChecking, UserCreation, ProduitChecking, PanierChecking, CommandeChecking};
 
 
-// Chemin vers le fichier JSON des utilisateurs
+
+// URLs des APIs
 $userApiUrl = 'http://localhost:9080/UserProduit-1.0-SNAPSHOT/api/user'; // URL de l'API utilisateurs
 $panierApiUrl = 'http://localhost:8080/paniers-1.0-SNAPSHOT/api/paniers'; // URL de l'API paniers
 $produitApiUrl = 'http://localhost:9080/UserProduit-1.0-SNAPSHOT/api/produit'; // URL de l'API produits
@@ -64,11 +65,8 @@ $commandeJsonPath = 'dataSimulate/commandes.json'; // Fichier JSON pour les comm
 $dataUsers = new UserApiAccess($userApiUrl);
 $dataPaniersProduits = new PanierApiAccess($panierApiUrl, $produitApiUrl);
 $dataPaniers = $dataPaniersProduits;
-$dataProduits = $dataPaniersProduits;
+$dataProduits = $dataPaniersProduits; // Même si on ne vend pas de produits individuellement, on garde cette référence pour compatibilité
 $dataCommandes = new CommandeJsonAccess($commandeJsonPath);
-$dataPaniers = $dataPaniersProduits;
-$dataProduits = $dataPaniersProduits;
-$dataPaniersProduits = new PanierApiAccess($panierApiUrl, $produitApiUrl);
 
 // Initialisation des services
 $controller = new Controllers();

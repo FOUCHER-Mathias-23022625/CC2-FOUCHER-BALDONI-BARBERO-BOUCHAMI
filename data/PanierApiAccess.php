@@ -72,8 +72,26 @@ class PanierApiAccess
     
     public function getAllPaniers()
     {
-        // Retourne tous les paniers chargés à l'initialisation
-        return $this->paniers;
+        // Formater les paniers pour être compatibles avec l'application existante
+        $formattedPaniers = [];
+        
+        foreach ($this->paniers as $panier) {
+            $formattedPaniers[] = [
+                'id' => $panier['id'],
+                'nom' => $panier['nom'],
+                'description' => $panier['description'],
+                'prix' => $panier['prixTotal'], // Utiliser prixTotal comme prix
+                'dateRetrait' => $panier['dateRetrait'],
+                'relais' => $panier['relais'],
+                'valide' => $panier['valide'],
+                'dateMAJ' => date('Y-m-d'), // Date actuelle car non fournie par l'API
+                'stock' => 10, // Valeur par défaut pour le stock
+                // Pas d'image comme demandé
+                'produits' => $panier['produits'] ?? []
+            ];
+        }
+        
+        return $formattedPaniers;
     }
     
     public function getPanier($id)
@@ -81,7 +99,19 @@ class PanierApiAccess
         // D'abord, essayer de trouver le panier localement
         foreach ($this->paniers as $panier) {
             if (isset($panier['id']) && $panier['id'] == $id) {
-                return $panier;
+                return [
+                    'id' => $panier['id'],
+                    'nom' => $panier['nom'],
+                    'description' => $panier['description'],
+                    'prix' => $panier['prixTotal'], // Utiliser prixTotal comme prix
+                    'dateRetrait' => $panier['dateRetrait'],
+                    'relais' => $panier['relais'],
+                    'valide' => $panier['valide'],
+                    'dateMAJ' => date('Y-m-d'), // Date actuelle car non fournie par l'API
+                    'stock' => 10, // Valeur par défaut pour le stock
+                    // Pas d'image comme demandé
+                    'produits' => $panier['produits'] ?? []
+                ];
             }
         }
         
@@ -103,39 +133,20 @@ class PanierApiAccess
         if (!$err) {
             $panier = json_decode($response, true);
             if ($panier) {
-                // Ajouter des informations supplémentaires pour compatibilité
-                if (!isset($panier['stock'])) {
-                    $panier['stock'] = 10; // Valeur par défaut
-                }
-                if (!isset($panier['image'])) {
-                    $panier['image'] = 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
-                }
-                if (!isset($panier['dateMAJ'])) {
-                    $panier['dateMAJ'] = date('Y-m-d');
-                }
-                
-                // Adapter le format du contenu si nécessaire
-                if (isset($panier['produits']) && is_array($panier['produits'])) {
-                    $contenu = [];
-                    foreach ($panier['produits'] as $produit) {
-                        $contenu[] = [
-                            'produitId' => $produit['id'] ?? '',
-                            'nom' => $produit['nom'] ?? '',
-                            'quantite' => $produit['quantite'] ?? 1,
-                            'unite' => $produit['unite'] ?? 'pièce'
-                        ];
-                    }
-                    $panier['contenu'] = $contenu;
-                } else {
-                    $panier['contenu'] = [];
-                }
-                
-                // Convertir prixTotal en prix pour compatibilité
-                if (isset($panier['prixTotal']) && !isset($panier['prix'])) {
-                    $panier['prix'] = $panier['prixTotal'];
-                }
-                
-                return $panier;
+                return [
+                    'id' => $panier['id'],
+                    'nom' => $panier['nom'],
+                    'description' => $panier['description'],
+                    'prix' => $panier['prixTotal'], // Utiliser prixTotal comme prix
+                    'dateRetrait' => $panier['dateRetrait'],
+                    'relais' => $panier['relais'],
+                    'valide' => $panier['valide'],
+                    'dateMAJ' => date('Y-m-d'), // Date actuelle car non fournie par l'API
+                    'stock' => 10, // Valeur par défaut pour le stock
+                    // Pas d'image comme demandé
+                    'produits' => $panier['produits'] ?? [],
+                    'contenu' => $this->formatContenuPanier($panier['produits'] ?? [])
+                ];
             }
         } else {
             error_log("Erreur API lors de la récupération du panier $id: " . $err);
@@ -143,6 +154,24 @@ class PanierApiAccess
         
         return null;
     }
+    
+    /**
+     * Formate les produits d'un panier en format compatible avec l'application
+     */
+    private function formatContenuPanier($produits)
+    {
+        $contenu = [];
+        foreach ($produits as $produit) {
+            $contenu[] = [
+                'produitId' => $produit['id'] ?? '',
+                'nom' => $produit['nom'] ?? '',
+                'quantite' => $produit['quantite'] ?? 1,
+                'unite' => $produit['unite'] ?? 'pièce'
+            ];
+        }
+        return $contenu;
+    }
+    
     
     public function getAllProduits()
     {
