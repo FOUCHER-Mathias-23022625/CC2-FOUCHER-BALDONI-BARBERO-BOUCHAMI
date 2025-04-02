@@ -17,12 +17,10 @@ public class UserService
 
         ArrayList<User> allUsers = UserRepo.getAllUser();
 
-
         for( User currentUser : allUsers ){
-            currentUser.setMail("");
-            currentUser.setPwd("");
+            currentUser.setMail(currentUser.getMail());
+            currentUser.setPwd(currentUser.getPwd());
         }
-
 
         String result = null;
         try( Jsonb jsonb = JsonbBuilder.create()){
