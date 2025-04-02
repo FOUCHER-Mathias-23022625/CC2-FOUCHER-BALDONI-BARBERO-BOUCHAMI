@@ -12,7 +12,7 @@ abstract class ViewLogged extends View
     {
         parent::__construct($layout);
 
-        $this->connexion = "<p> Hello $login </p>".'<a href="/index.php/logout">Déconnexion</a>';
+        $this->connexion = "<p> Bonjour $login </p>".'<a href="/index.php/logout">Déconnexion</a>';
     }
 
     public function display()

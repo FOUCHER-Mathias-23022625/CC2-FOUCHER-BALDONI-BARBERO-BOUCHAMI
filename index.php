@@ -1,10 +1,8 @@
 <?php
 // filepath: c:\Users\malio\Desktop\dossier important\coursIUTaix\archi logi\CC2\CC2-FOUCHER-BALDONI-BARBERO-BOUCHAMI\index.php
 
-// Import des données et services pour l'authentification via JSON
-include_once 'data/UserJsonAccess.php';
+include_once 'data/UserApiAccess.php';
 
-// Import des nouveaux composants pour le e-commerce
 include_once 'control/Controllers.php';
 include_once 'control/Presenter.php';
 
@@ -35,6 +33,8 @@ include_once 'service/CommandeChecking.php';
 include_once 'gui/ViewConfirmation.php';
 include_once 'gui/ViewMesCommandes.php';
 
+include_once 'data/PanierApiAccess.php';
+
 use gui\{
     ViewLogin,
     ViewError,
@@ -50,21 +50,25 @@ use gui\{
     Layout
 };
 use control\{Controllers, Presenter};
-use data\{UserJsonAccess, ProduitJsonAccess, PanierJsonAccess, CommandeJsonAccess};
+use data\{UserApiAccess, ProduitJsonAccess, PanierJsonAccess, CommandeJsonAccess};
 use service\{UserChecking, UserCreation, ProduitChecking, PanierChecking, CommandeChecking};
 
 
 // Chemin vers le fichier JSON des utilisateurs
-$userJsonPath = 'dataSimulate/user.json';
-$produitJsonPath = 'dataSimulate/produits.json';
-$panierJsonPath = 'dataSimulate/paniers.json';
-$commandeJsonPath = 'dataSimulate/commandes.json';
+$userApiUrl = 'http://localhost:9080/UserProduit-1.0-SNAPSHOT/api/user'; // URL de l'API utilisateurs
+$panierApiUrl = 'http://localhost:8080/paniers-1.0-SNAPSHOT/api/paniers'; // URL de l'API paniers
+$produitApiUrl = 'http://localhost:9080/UserProduit-1.0-SNAPSHOT/api/produit'; // URL de l'API produits
+$commandeJsonPath = 'dataSimulate/commandes.json'; // Fichier JSON pour les commandes
 
-
-$dataUsers = new UserJsonAccess($userJsonPath);
-$dataProduits = new ProduitJsonAccess($produitJsonPath);
-$dataPaniers = new PanierJsonAccess($panierJsonPath);
+// Initialisation des accès aux données
+$dataUsers = new UserApiAccess($userApiUrl);
+$dataPaniersProduits = new PanierApiAccess($panierApiUrl, $produitApiUrl);
+$dataPaniers = $dataPaniersProduits;
+$dataProduits = $dataPaniersProduits;
 $dataCommandes = new CommandeJsonAccess($commandeJsonPath);
+$dataPaniers = $dataPaniersProduits;
+$dataProduits = $dataPaniersProduits;
+$dataPaniersProduits = new PanierApiAccess($panierApiUrl, $produitApiUrl);
 
 // Initialisation des services
 $controller = new Controllers();
