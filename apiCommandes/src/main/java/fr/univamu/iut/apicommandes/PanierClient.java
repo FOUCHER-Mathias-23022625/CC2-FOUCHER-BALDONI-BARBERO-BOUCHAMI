@@ -11,6 +11,9 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
+/**
+ * Classe client pour interagir avec l'API Panier.
+ */
 @ApplicationScoped
 public class PanierClient implements PanierClientInterface {
     private final String baseUrl;
@@ -36,7 +39,7 @@ public class PanierClient implements PanierClientInterface {
                 return extractPrixTotal(panier);
             }
         } catch (Exception e) {
-            System.err.println("probleme connexion api panier: " + e.getMessage());
+            System.err.println("Problème de connexion à l'API Panier: " + e.getMessage());
         }
         return 0.0;
     }
@@ -54,7 +57,7 @@ public class PanierClient implements PanierClientInterface {
                 return response.readEntity(Object.class);
             }
         } catch (Exception e) {
-            System.err.println("probleme connexion api panier: " + e.getMessage());
+            System.err.println("Problème de connexion à l'API Panier: " + e.getMessage());
         }
         return null;
     }
@@ -68,7 +71,7 @@ public class PanierClient implements PanierClientInterface {
                 return response.readEntity(new GenericType<List<Object>>(){});
             }
         } catch (Exception e) {
-            System.err.println("probleme connexion api panier: " + e.getMessage());
+            System.err.println("Problème de connexion à l'API Panier: " + e.getMessage());
         }
         return null;
     }

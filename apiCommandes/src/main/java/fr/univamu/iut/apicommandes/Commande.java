@@ -1,8 +1,10 @@
 package fr.univamu.iut.apicommandes;
 
-
 import java.sql.Date;
 
+/**
+ * Représente une commande avec ses détails.
+ */
 public class Commande {
 
     protected int id;
@@ -10,6 +12,14 @@ public class Commande {
     protected String localisationRetrait;
     protected Date dateRetrait;
 
+    /**
+     * Constructeur avec paramètres.
+     *
+     * @param id l'identifiant de la commande
+     * @param prix le prix de la commande
+     * @param localisationRetrait la localisation de retrait de la commande
+     * @param dateRetrait la date de retrait de la commande
+     */
     public Commande(int id, int prix, String localisationRetrait, Date dateRetrait) {
         this.id = id;
         this.prix = prix;
@@ -17,8 +27,13 @@ public class Commande {
         this.dateRetrait = dateRetrait;
     }
 
+    /**
+     * Constructeur par défaut.
+     */
     public Commande() {
     }
+
+    // Getters et setters
 
     public int getId() {
         return id;
@@ -61,5 +76,4 @@ public class Commande {
                 ", dateRetrait=" + dateRetrait +
                 '}';
     }
-
 }

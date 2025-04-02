@@ -3,17 +3,34 @@ package fr.univamu.iut.apicommandes;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Implémentation de CommandeRepositoryInterface pour MariaDB.
+ */
 public class CommandeRepositoryMariadb implements CommandeRepositoryInterface {
 
     protected Connection connection;
     protected PanierClientInterface panierClient;
 
-    public CommandeRepositoryMariadb(String infoConnexion, String user, String password) throws SQLException, java.lang.ClassNotFoundException {
+    /**
+     * Constructeur avec paramètres pour la connexion à la base de données.
+     *
+     * @param infoConnexion les informations de connexion
+     * @param user le nom d'utilisateur
+     * @param password le mot de passe
+     * @throws SQLException si une erreur SQL se produit
+     * @throws ClassNotFoundException si le driver JDBC n'est pas trouvé
+     */
+    public CommandeRepositoryMariadb(String infoConnexion, String user, String password) throws SQLException, ClassNotFoundException {
         Class.forName("org.mariadb.jdbc.Driver");
         connection = DriverManager.getConnection(infoConnexion, user, password);
-        // The panierClient will be injected later
+        // Le panierClient est injecté plus tard
     }
 
+    /**
+     * Définit le client panier.
+     *
+     * @param panierClient le client panier à définir
+     */
     public void setPanierClient(PanierClientInterface panierClient) {
         this.panierClient = panierClient;
     }
@@ -208,10 +225,10 @@ public class CommandeRepositoryMariadb implements CommandeRepositoryInterface {
                     total += panierTotal * quantite;
                 }
             } else {
-                System.err.println("PanierClient noN initialisé");
+                System.err.println("PanierClient non initialisé");
             }
         } catch (Exception e) {
-            System.err.println("erreur calcul prix total: " + e.getMessage());
+            System.err.println("Erreur calcul prix total: " + e.getMessage());
         }
 
         return total;
