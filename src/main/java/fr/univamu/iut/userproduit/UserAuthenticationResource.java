@@ -14,7 +14,7 @@ import java.util.Base64;
  * Ressource associée à l'authentification des utilisateurs
  * (point d'accès de l'API REST)
  */
-@Path("/authenticate")
+@Path("/user/authenticate")
 @ApplicationScoped
 public class UserAuthenticationResource {
 
