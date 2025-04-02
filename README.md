@@ -123,5 +123,5 @@ $commandeApiUrl = 'http://localhost:7080/apiCommandes-1.0-SNAPSHOT/api/commandes
 Sécurité et limitations
 L'application nécessite que toutes les API soient accessibles pour fonctionner correctement
 La gestion des erreurs d'API inclut des logs mais nécessiterait un traitement plus robuste en production
-L'authentification repose entièrement sur les sessions PHP et l'API Utilisateurs
+L'authentification repose entièrement sur les sessions PHP et l'API Utilisateur
 ```
