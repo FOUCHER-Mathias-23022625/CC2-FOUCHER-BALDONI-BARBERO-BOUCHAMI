@@ -35,12 +35,6 @@ class Presenter
                     <div class="product-name">' . htmlspecialchars($produit['nom']) . '</div>
                     <div class="product-description">' . htmlspecialchars(substr($produit['description'], 0, 100)) . '...</div>
                     <div class="product-price">' . number_format($produit['prix'], 2, ',', ' ') . ' € / ' . htmlspecialchars($produit['unite']) . '</div>
-                    <div class="quantity-control">
-                        <button onclick="updateQuantity(this, -1)">-</button>
-                        <input type="number" value="1" min="1" max="' . htmlspecialchars($produit['stock']) . '">
-                        <button onclick="updateQuantity(this, 1)">+</button>
-                    </div>
-                    <button class="add-to-cart" data-id="' . htmlspecialchars($produit['id']) . '" data-type="produit">Ajouter au panier</button>
                 </div>';
             }
         } else {
