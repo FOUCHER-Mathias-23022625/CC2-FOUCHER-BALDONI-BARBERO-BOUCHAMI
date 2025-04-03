@@ -8,12 +8,18 @@ class PanierJsonAccess
     private $filePath;
     private $paniers = [];
 
+    /**
+     * @param $filePath
+     */
     public function __construct($filePath)
     {
         $this->filePath = $filePath;
         $this->loadPaniers();
     }
 
+    /**
+     * @return void
+     */
     private function loadPaniers()
     {
         if (file_exists($this->filePath)) {
@@ -22,11 +28,18 @@ class PanierJsonAccess
         }
     }
 
+    /**
+     * @return array
+     */
     public function getAllPaniers()
     {
         return $this->paniers;
     }
 
+    /**
+     * @param $id
+     * @return mixed|null
+     */
     public function getPanier($id)
     {
         foreach ($this->paniers as $panier) {
@@ -37,6 +50,11 @@ class PanierJsonAccess
         return null;
     }
 
+    /**
+     * @param $id
+     * @param $quantity
+     * @return bool
+     */
     public function updateStock($id, $quantity)
     {
         foreach ($this->paniers as &$panier) {

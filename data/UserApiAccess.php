@@ -13,13 +13,19 @@ class UserApiAccess implements UserAccessInterface
 {
     private $apiUrl;
     private $users = [];
-    
+
+    /**
+     * @param $apiUrl
+     */
     public function __construct($apiUrl)
     {
         $this->apiUrl = $apiUrl;
         $this->loadUsers();
     }
-    
+
+    /**
+     * @return void
+     */
     private function loadUsers()
     {
         // Utiliser cURL pour récupérer les données de l'API
@@ -46,7 +52,12 @@ class UserApiAccess implements UserAccessInterface
             error_log("Erreur API User: " . $err);
         }
     }
-    
+
+    /**
+     * @param $login
+     * @param $password
+     * @return User|null
+     */
     public function getUser($login, $password)
     {
         // Ajout d'un log de débogage
@@ -91,7 +102,14 @@ class UserApiAccess implements UserAccessInterface
         error_log("Aucun utilisateur trouvé pour login=$login");
         return null;
     }
-    
+
+    /**
+     * @param $login
+     * @param $password
+     * @param $name
+     * @param $firstName
+     * @return bool
+     */
     public function createUser($login, $password, $name, $firstName)
     {
         // Vérifier si l'utilisateur existe déjà

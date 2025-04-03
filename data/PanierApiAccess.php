@@ -7,7 +7,11 @@ class PanierApiAccess
     private $apiUrlProduits;
     private $paniers = [];
     private $produits = [];
-    
+
+    /**
+     * @param $apiUrlPaniers
+     * @param $apiUrlProduits
+     */
     public function __construct($apiUrlPaniers, $apiUrlProduits)
     {
         $this->apiUrlPaniers = $apiUrlPaniers;
@@ -15,7 +19,10 @@ class PanierApiAccess
         $this->loadPaniers();
         $this->loadProduits();
     }
-    
+
+    /**
+     * @return void
+     */
     private function loadPaniers()
     {
         // Utiliser cURL pour récupérer les données de l'API
@@ -42,7 +49,10 @@ class PanierApiAccess
             error_log("Erreur API Paniers: " . $err);
         }
     }
-    
+
+    /**
+     * @return void
+     */
     private function loadProduits()
     {
         // Utiliser cURL pour récupérer les produits de l'API
@@ -69,7 +79,10 @@ class PanierApiAccess
             error_log("Erreur API Produits: " . $err);
         }
     }
-    
+
+    /**
+     * @return array
+     */
     public function getAllPaniers()
     {
         // Formater les paniers pour être compatibles avec l'application existante
@@ -93,7 +106,11 @@ class PanierApiAccess
         
         return $formattedPaniers;
     }
-    
+
+    /**
+     * @param $id
+     * @return array|null
+     */
     public function getPanier($id)
     {
         // D'abord, essayer de trouver le panier localement
@@ -158,6 +175,10 @@ class PanierApiAccess
     /**
      * Formate les produits d'un panier en format compatible avec l'application
      */
+    /**
+     * @param $produits
+     * @return array
+     */
     private function formatContenuPanier($produits)
     {
         $contenu = [];
@@ -171,8 +192,10 @@ class PanierApiAccess
         }
         return $contenu;
     }
-    
-    
+
+    /**
+     * @return array
+     */
     public function getAllProduits()
     {
         // Adapter le format des produits pour correspondre à ce qu'attend l'application
@@ -193,7 +216,11 @@ class PanierApiAccess
         
         return $formattedProduits;
     }
-    
+
+    /**
+     * @param $id
+     * @return array|null
+     */
     public function getProduit($id)
     {
         // D'abord, essayer de trouver le produit localement
@@ -247,7 +274,12 @@ class PanierApiAccess
         
         return null;
     }
-    
+
+    /**
+     * @param $id
+     * @param $quantity
+     * @return true
+     */
     public function updateStock($id, $quantity)
     {
         // Cette méthode pourrait être implémentée si l'API offre une fonctionnalité de mise à jour de stock

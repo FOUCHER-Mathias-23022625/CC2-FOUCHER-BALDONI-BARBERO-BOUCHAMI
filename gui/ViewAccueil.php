@@ -5,6 +5,11 @@ include_once "View.php";
 
 class ViewAccueil extends View
 {
+    /**
+     * @param $layout
+     * @param $login
+     * @param $presenter
+     */
     public function __construct($layout, $login, $presenter)
     {
         parent::__construct($layout, $login);

@@ -7,6 +7,11 @@ include_once "ViewLogged.php";
 
 class ViewConfirmation extends ViewLogged
 {
+    /**
+     * @param $layout
+     * @param $login
+     * @param $commandeId
+     */
     public function __construct($layout, $login, $commandeId)
     {
         parent::__construct($layout, $login);

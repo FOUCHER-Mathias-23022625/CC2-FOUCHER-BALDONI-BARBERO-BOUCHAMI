@@ -7,11 +7,18 @@ class PanierChecking
 {
     protected $paniersTxt = [];
 
+    /**
+     * @return array|mixed
+     */
     public function getPaniersTxt()
     {
         return $this->paniersTxt;
     }
 
+    /**
+     * @param $data
+     * @return void
+     */
     public function getAllPaniers($data)
     {
         $paniers = $data->getAllPaniers();
@@ -30,6 +37,11 @@ class PanierChecking
         }
     }
 
+    /**
+     * @param $id
+     * @param $data
+     * @return void
+     */
     public function getPanier($id, $data)
     {
         $panier = $data->getPanier($id);

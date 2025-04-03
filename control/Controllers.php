@@ -3,7 +3,13 @@ namespace control;
 
 class Controllers
 {
-
+    /**
+     * @param $userCreation
+     * @param $userCheck
+     * @param $dataUsers
+     * @return string|void
+     *
+     */
     public function  authenticateAction($userCreation, $userCheck, $dataUsers){
 
         // Si l'utilisateur n'a pas de session ouverte

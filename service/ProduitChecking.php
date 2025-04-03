@@ -7,11 +7,18 @@ class ProduitChecking
 {
     protected $produitsTxt = [];
 
+    /**
+     * @return array|mixed
+     */
     public function getProduitsTxt()
     {
         return $this->produitsTxt;
     }
 
+    /**
+     * @param $data
+     * @return void
+     */
     public function getAllProduits($data)
     {
         $produits = $data->getAllProduits();
@@ -31,6 +38,11 @@ class ProduitChecking
         }
     }
 
+    /**
+     * @param $id
+     * @param $data
+     * @return void
+     */
     public function getProduit($id, $data)
     {
         $produit = $data->getProduit($id);

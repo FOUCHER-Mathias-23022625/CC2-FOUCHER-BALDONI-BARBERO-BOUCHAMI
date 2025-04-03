@@ -7,6 +7,9 @@ include_once "View.php";
 
 class ViewLogin extends View
 {
+    /**
+     * @param $layout
+     */
     public function __construct($layout)
     {
         parent::__construct($layout);

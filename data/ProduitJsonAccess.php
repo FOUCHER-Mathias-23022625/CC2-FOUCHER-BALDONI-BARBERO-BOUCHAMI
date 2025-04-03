@@ -8,12 +8,18 @@ class ProduitJsonAccess
     private $filePath;
     private $produits = [];
 
+    /**
+     * @param $filePath
+     */
     public function __construct($filePath)
     {
         $this->filePath = $filePath;
         $this->loadProduits();
     }
 
+    /**
+     * @return void
+     */
     private function loadProduits()
     {
         if (file_exists($this->filePath)) {
@@ -22,11 +28,18 @@ class ProduitJsonAccess
         }
     }
 
+    /**
+     * @return array
+     */
     public function getAllProduits()
     {
         return $this->produits;
     }
 
+    /**
+     * @param $id
+     * @return mixed|null
+     */
     public function getProduit($id)
     {
         foreach ($this->produits as $produit) {
@@ -37,6 +50,11 @@ class ProduitJsonAccess
         return null;
     }
 
+    /**
+     * @param $id
+     * @param $quantity
+     * @return bool
+     */
     public function updateStock($id, $quantity)
     {
         foreach ($this->produits as &$produit) {

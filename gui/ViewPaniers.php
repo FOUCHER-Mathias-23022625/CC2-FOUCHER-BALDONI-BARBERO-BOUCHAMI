@@ -7,6 +7,11 @@ include_once "ViewLogged.php";
 
 class ViewPaniers extends ViewLogged
 {
+    /**
+     * @param $layout
+     * @param $login
+     * @param $presenter
+     */
     public function __construct($layout, $login, $presenter)
     {
         parent::__construct($layout, $login);

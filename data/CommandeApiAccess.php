@@ -6,7 +6,10 @@ class CommandeApiAccess
 {
     private $apiUrl;
     private $commandes = [];
-    
+
+    /**
+     * @param $apiUrl
+     */
     public function __construct($apiUrl)
     {
         $this->apiUrl = $apiUrl;
@@ -14,6 +17,9 @@ class CommandeApiAccess
     
     /**
      * Récupère toutes les commandes depuis l'API
+     */
+    /**
+     * @return array|mixed
      */
     public function getAllCommandes()
     {
@@ -44,6 +50,10 @@ class CommandeApiAccess
      * Récupère les commandes d'un utilisateur spécifique
      * Note: L'API ne semble pas fournir ce point d'entrée, donc on filtre côté client
      */
+    /**
+     * @param $login
+     * @return array
+     */
     public function getCommandesByUser($login)
     {
         $allCommandes = $this->getAllCommandes();
@@ -62,6 +72,10 @@ class CommandeApiAccess
     
     /**
      * Récupère une commande par son ID
+     */
+    /**
+     * @param $id
+     * @return mixed|null
      */
     public function getCommande($id)
     {
@@ -100,6 +114,10 @@ class CommandeApiAccess
     /**
      * Récupère le contenu d'une commande
      */
+    /**
+     * @param $id
+     * @return mixed|null
+     */
     private function getCommandeContenu($id)
     {
         $curl = curl_init();
@@ -126,6 +144,16 @@ class CommandeApiAccess
     
     /**
      * Crée une nouvelle commande
+     */
+    /**
+     * @param $login
+     * @param $relai
+     * @param $dateRetrait
+     * @param $heureRetrait
+     * @param $produits
+     * @param $paniers
+     * @param $total
+     * @return mixed|null
      */
     public function createCommande($login, $relai, $dateRetrait, $heureRetrait, $produits, $paniers, $total)
     {
@@ -179,6 +207,12 @@ class CommandeApiAccess
     /**
      * Ajoute un panier à une commande
      */
+    /**
+     * @param $commandeId
+     * @param $panierId
+     * @param $quantite
+     * @return bool
+     */
     private function addPanierToCommande($commandeId, $panierId, $quantite)
     {
         $panierData = [
@@ -213,6 +247,11 @@ class CommandeApiAccess
     
     /**
      * Met à jour le statut d'une commande
+     */
+    /**
+     * @param $id
+     * @param $status
+     * @return false
      */
     public function updateCommandeStatus($id, $status)
     {

@@ -10,7 +10,12 @@ class Presenter
     protected $panierCheck;
     protected $commandeCheck;
 
-
+    /**
+     * @param $annoncesCheck
+     * @param $produitCheck
+     * @param $panierCheck
+     * @param $commandeCheck
+     */
     public function __construct($annoncesCheck = null, $produitCheck = null, $panierCheck = null, $commandeCheck = null)
 {
     $this->annoncesCheck = $annoncesCheck;
@@ -19,9 +24,9 @@ class Presenter
     $this->commandeCheck = $commandeCheck;
 }
 
-    // Méthodes existantes...
-
-    // Nouvelle méthode pour les produits
+    /**
+     * @return string
+     */
     public function getAllProduitsHTML()
     {
         $content = '<h1>Nos produits</h1>';
@@ -45,7 +50,11 @@ class Presenter
         return $content;
     }
 
-    // Nouvelle méthode pour les paniers
+    // méthode pour les paniers
+
+    /**
+     * @return string
+     */
     public function getAllPaniersHTML()
     {
         $content = '<h1>Paniers disponibles</h1>';
@@ -75,6 +84,10 @@ class Presenter
     }
 
     // Nouvelle méthode pour le détail d'un panier
+
+    /**
+     * @return string
+     */
     public function getPanierDetailHTML()
     {
         if (!$this->panierCheck || !$this->panierCheck->getPaniersTxt()) {
@@ -127,6 +140,10 @@ class Presenter
         
         return $content;
     }
+
+    /**
+     * @return string
+     */
     public function getMesCommandesHTML()
 {
     $content = '<h1>Mes commandes</h1>';

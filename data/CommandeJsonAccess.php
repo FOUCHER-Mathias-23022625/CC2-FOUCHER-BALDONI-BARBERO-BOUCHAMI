@@ -8,12 +8,18 @@ class CommandeJsonAccess
     private $filePath;
     private $commandes = [];
 
+    /**
+     * @param $filePath
+     */
     public function __construct($filePath)
     {
         $this->filePath = $filePath;
         $this->loadCommandes();
     }
 
+    /**
+     * @return void
+     */
     private function loadCommandes()
     {
         if (file_exists($this->filePath)) {
@@ -22,6 +28,9 @@ class CommandeJsonAccess
         }
     }
 
+    /**
+     * @return void
+     */
     private function saveCommandes()
     {
         // S'assurer que le dossier existe
@@ -35,12 +44,21 @@ class CommandeJsonAccess
     }
 
     // Récupérer toutes les commandes
+
+    /**
+     * @return array
+     */
     public function getAllCommandes()
     {
         return $this->commandes;
     }
 
     // Récupérer les commandes d'un utilisateur spécifique
+
+    /**
+     * @param $login
+     * @return array
+     */
     public function getCommandesByUser($login)
     {
         $userCommandes = [];
@@ -53,6 +71,11 @@ class CommandeJsonAccess
     }
 
     // Récupérer une commande par son ID
+
+    /**
+     * @param $id
+     * @return mixed|null
+     */
     public function getCommande($id)
     {
         foreach ($this->commandes as $commande) {
@@ -64,6 +87,17 @@ class CommandeJsonAccess
     }
 
     // Créer une nouvelle commande
+
+    /**
+     * @param $login
+     * @param $relai
+     * @param $dateRetrait
+     * @param $heureRetrait
+     * @param $produits
+     * @param $paniers
+     * @param $total
+     * @return int|mixed
+     */
     public function createCommande($login, $relai, $dateRetrait, $heureRetrait, $produits, $paniers, $total)
     {
         // Générer un nouvel ID (le plus grand ID + 1)
@@ -97,6 +131,12 @@ class CommandeJsonAccess
     }
 
     // Mettre à jour le statut d'une commande
+
+    /**
+     * @param $id
+     * @param $status
+     * @return bool
+     */
     public function updateCommandeStatus($id, $status)
     {
         foreach ($this->commandes as &$commande) {

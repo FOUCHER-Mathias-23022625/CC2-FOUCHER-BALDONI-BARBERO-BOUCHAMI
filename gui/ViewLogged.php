@@ -8,6 +8,10 @@ abstract class ViewLogged extends View
 {
     protected $connexion = '';
 
+    /**
+     * @param $layout
+     * @param $login
+     */
     public function __construct($layout, $login)
     {
         parent::__construct($layout);
