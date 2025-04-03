@@ -45,6 +45,21 @@ public class PanierClient implements PanierClientInterface {
     }
 
     private double extractPrixTotal(Object panier) {
+        try {
+            if (panier instanceof java.util.Map) {
+                java.util.Map<?, ?> panierMap = (java.util.Map<?, ?>) panier;
+                if (panierMap.containsKey("prix")) {
+                    Object prix = panierMap.get("prix");
+                    if (prix instanceof Number) {
+                        return ((Number) prix).doubleValue();
+                    } else if (prix instanceof String) {
+                        return Double.parseDouble((String) prix);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur lors de l'extraction du prix: " + e.getMessage());
+        }
         return 0.0;
     }
 

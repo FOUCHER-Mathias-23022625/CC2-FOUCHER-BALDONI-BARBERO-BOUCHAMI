@@ -60,7 +60,7 @@ public class CommandeService {
      * @return true si la mise à jour a réussi, false sinon
      */
     public boolean updateCommande(int id, Commande commande) {
-        return commandeRepo.updateCommande(id, commande.getPrix(), commande.getLocalisationRetrait(), commande.getDateRetrait());
+        return commandeRepo.updateCommande(id, 0, commande.getLocalisationRetrait(), commande.getDateRetrait());
     }
 
     /**

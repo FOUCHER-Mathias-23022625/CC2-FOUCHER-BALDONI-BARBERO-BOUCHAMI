@@ -24,7 +24,6 @@ L'API Commande est conçue pour gérer les commandes et leur contenu. Elle inter
   Content-Type: application/json
   Body: {
     "id": 101,
-    "prix": 4500,
     "localisationRetrait": "Marseille",
     "dateRetrait": "2024-06-01"
   }
@@ -35,7 +34,6 @@ L'API Commande est conçue pour gérer les commandes et leur contenu. Elle inter
   PUT /apiCommandes-1.0-SNAPSHOT/api/commandes/{id}
   Content-Type: application/json
   Body: {
-    "prix": 5000,
     "localisationRetrait": "Aix-en-Provence",
     "dateRetrait": "2024-06-15"
   }
@@ -95,6 +93,8 @@ private static final String PANIER_API_URL = "http://localhost:7080/paniers-1.0-
 ```
 
 ## Informations importantes
+
+le prix est calculé automatiquement en fonction des produits contenus dans la commande
 
 - Assurez-vous que l'API Panier est en cours d'exécution et accessible à l'URL spécifiée.
 - La classe `CommandeRepositoryMariadb` nécessite une connexion valide à MariaDB. Mettez à jour les paramètres de connexion dans la méthode `createCommandeRepository` de la classe `CommandeApplication`.

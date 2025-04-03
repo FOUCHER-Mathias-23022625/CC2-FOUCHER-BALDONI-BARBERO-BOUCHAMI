@@ -44,6 +44,27 @@ public class CommandeRepositoryMariadb implements CommandeRepositoryInterface {
         }
     }
 
+    /**
+     * Met à jour le prix d'une commande en fonction du contenu.
+     *
+     * @param idCommande l'identifiant de la commande
+     * @return true si la mise à jour a réussi
+     */
+    private boolean updateCommandePrix(int idCommande) {
+        double total = getCommandeTotal(idCommande);
+        String query = "UPDATE commandes SET prix = ? WHERE id_commande = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setDouble(1, total);
+            ps.setInt(2, idCommande);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Erreur SQL mise à jour prix: " + e.getMessage());
+            return false;
+        }
+    }
+
     @Override
     public Commande getCommandeById(int id) {
         Commande commandeSelected = null;
@@ -93,13 +114,12 @@ public class CommandeRepositoryMariadb implements CommandeRepositoryInterface {
 
     @Override
     public boolean addCommande(Commande commande) {
-        String query = "INSERT INTO commandes (id_commande, prix, localisation_retrait, date_retrait) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO commandes (id_commande, prix, localisation_retrait, date_retrait) VALUES (?, 0, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, commande.getId());
-            ps.setInt(2, commande.getPrix());
-            ps.setString(3, commande.getLocalisationRetrait());
-            ps.setDate(4, commande.getDateRetrait());
+            ps.setString(2, commande.getLocalisationRetrait());
+            ps.setDate(3, commande.getDateRetrait());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -124,14 +144,14 @@ public class CommandeRepositoryMariadb implements CommandeRepositoryInterface {
 
     @Override
     public boolean updateCommande(int id, int prix, String localisationRetrait, Date dateRetrait) {
-        String query = "UPDATE commandes SET prix = ?, localisation_retrait = ?, date_retrait = ? WHERE id_commande = ?";
+        String query = "UPDATE commandes SET localisation_retrait = ?, date_retrait = ? WHERE id_commande = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, prix);
-            ps.setString(2, localisationRetrait);
-            ps.setDate(3, dateRetrait);
-            ps.setInt(4, id);
+            ps.setString(1, localisationRetrait);
+            ps.setDate(2, dateRetrait);
+            ps.setInt(3, id);
             ps.executeUpdate();
+            updateCommandePrix(id);
             return true;
         } catch (SQLException e) {
             System.err.println("Erreur SQL: " + e.getMessage());
@@ -171,6 +191,8 @@ public class CommandeRepositoryMariadb implements CommandeRepositoryInterface {
             ps.setInt(2, commandeContient.getIdPanier());
             ps.setInt(3, commandeContient.getQuantite());
             ps.executeUpdate();
+            // Mise à jour du prix total de la commande
+            updateCommandePrix(commandeContient.getIdCommande());
             return true;
         } catch (SQLException e) {
             System.err.println("Erreur SQL: " + e.getMessage());
@@ -186,6 +208,8 @@ public class CommandeRepositoryMariadb implements CommandeRepositoryInterface {
             ps.setInt(1, idCommande);
             ps.setInt(2, idPanier);
             ps.executeUpdate();
+            // Mise à jour du prix total de la commande
+            updateCommandePrix(idCommande);
             return true;
         } catch (SQLException e) {
             System.err.println("Erreur SQL: " + e.getMessage());
@@ -202,6 +226,8 @@ public class CommandeRepositoryMariadb implements CommandeRepositoryInterface {
             ps.setInt(2, idCommande);
             ps.setInt(3, idPanier);
             ps.executeUpdate();
+            // Mise à jour du prix total de la commande
+            updateCommandePrix(idCommande);
             return true;
         } catch (SQLException e) {
             System.err.println("Erreur SQL: " + e.getMessage());
@@ -233,4 +259,6 @@ public class CommandeRepositoryMariadb implements CommandeRepositoryInterface {
 
         return total;
     }
+
+
 }

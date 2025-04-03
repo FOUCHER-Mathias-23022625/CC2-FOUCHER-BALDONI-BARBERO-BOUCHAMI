@@ -6,6 +6,8 @@ import jakarta.enterprise.inject.Produces;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
+import java.util.ArrayList;
+
 /**
  * Classe principale de l'application de gestion des commandes.
  */
@@ -84,3 +86,4 @@ public class CommandeApplication extends Application {
         }
     }
 }
+
